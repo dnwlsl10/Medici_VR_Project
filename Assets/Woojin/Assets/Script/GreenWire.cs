@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenWire : MonoBehaviour
+public class GreenWire : WireBox
 {
     public GameObject effect;
     public GameObject point;
-    private System.Action OnComplete;
     public void Init(System.Action callback)
     {
         Debug.Log("1");
@@ -14,4 +13,10 @@ public class GreenWire : MonoBehaviour
         this.point.SetActive(false);
         callback();
     }
+
+    public override void OnCompare(string tag)
+    {
+        base.OnCompare(tag);
+    }
+
 }
