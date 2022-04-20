@@ -1,0 +1,7 @@
+1. canvus 내에 빈 오브젝트를 만들고 그 이름을 정함 (ex  Start Screen UI , Setting Screen UI)
+
+2. UIManager 에 GameObject canvus 에 켄버지 대입
+
+3. UI 키고 싶은 경우  TurnOnUI ( "키고싶은 UI명1/키고싶은 UI명2" );
+
+4. UI 끄고 싶은 경우  TurnOnUI ( "끄고싶은 UI명1/끄고싶은 UI명2" );
