@@ -8,7 +8,6 @@ public class ButtonInput : MonoBehaviour
     string[] objName = new string[4];
     public int clickCount = 4;
     string[] correctAnswer = new string[4];
-    Material mat;
 
 
     enum State
@@ -104,6 +103,7 @@ public class ButtonInput : MonoBehaviour
         switch (state)
         {
             case State.Success:
+               
 
                 break;
 
@@ -119,5 +119,7 @@ public class ButtonInput : MonoBehaviour
                 break;
         }
     }
+
+   
 
 }
