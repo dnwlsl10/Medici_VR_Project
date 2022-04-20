@@ -44,7 +44,7 @@ public class ButtonInput : MonoBehaviour
             {
                 if(hit.transform.tag == "buttons")
                 {
-                    hit.collider.gameObject.GetComponent<Renderer>().material.color = Color.green;
+                    hit.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = Color.green;
                 }
 
                 if (objName[0] == null)
@@ -91,8 +91,7 @@ public class ButtonInput : MonoBehaviour
             (objName[0] != correctAnswer[0] ||
             objName[1] != correctAnswer[1] ||
             objName[2] != correctAnswer[2] ||
-            objName[3] != correctAnswer[3])
-            )
+            objName[3] != correctAnswer[3]))
         {       
             state = State.Fail;
             print(state);
@@ -112,7 +111,7 @@ public class ButtonInput : MonoBehaviour
                 objName = new string[4];
                 for(int i = 0; i < buttons.Length; i++)
                 {
-                    buttons[i].GetComponent<Renderer>().material.color = Color.white;
+                    buttons[i].GetComponent<Renderer>().material.color = Color.black;
                 }
                 state = State.Playing;
                 
