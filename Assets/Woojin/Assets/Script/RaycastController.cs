@@ -5,12 +5,7 @@ using UnityEngine;
 public class RaycastController : MonoBehaviour
 {
     RaycastHit hitOut;
-    public WireBox wireBox;
 
-    public void Start()
-    {
-    
-    }
     private void Update()
     {
         this.OnRayCast();
