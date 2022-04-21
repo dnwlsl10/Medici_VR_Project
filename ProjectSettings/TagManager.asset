@@ -9,6 +9,14 @@ TagManager:
   - BlueWire
   - YellowWire
   - Window
+  - door
+  - button f5
+  - button f3
+  - button f4
+  - button f2
+  - button f1
+  - button f6
+  - Bomb
   layers:
   - Default
   - TransparentFX
