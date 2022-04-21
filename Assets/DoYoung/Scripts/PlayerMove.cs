@@ -25,9 +25,7 @@ public class PlayerMove : MonoBehaviour
             yVelocity += gravity * Time.deltaTime;
         }
 
-
-
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))
+        // if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))
         {
             Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
             Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
@@ -37,24 +35,29 @@ public class PlayerMove : MonoBehaviour
             velocity.y = yVelocity;
             cc.Move(velocity * Time.deltaTime);
         }
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        float mx = Input.GetAxis("Mouse X");
-        float my = Input.GetAxis("Mouse Y");
 
-        Vector3 dir = new Vector3(h, 0, v);
-        dir = transform.TransformDirection(dir);
-        dir.y = 0;
-        dir.Normalize();
-        rx += rotSpeed * my * Time.deltaTime;
-        ry += rotSpeed * mx * Time.deltaTime;
+        // float h = Input.GetAxisRaw("Horizontal");
+        // float v = Input.GetAxisRaw("Vertical");
+        // float mx = Input.GetAxis("Mouse X");
+        // float my = Input.GetAxis("Mouse Y");
+        // float h = Input.GetAxisRaw("Horizontal");
+        // float v = Input.GetAxisRaw("Vertical");
+        // float mx = Input.GetAxis("Mouse X");
+        // float my = Input.GetAxis("Mouse Y");
 
-        rx = Mathf.Clamp(rx, -80, 80);
+        // Vector3 dir = new Vector3(h, 0, v);
+        // dir = transform.TransformDirection(dir);
+        // dir.y = 0;
+        // dir.Normalize();
+        // rx += rotSpeed * my * Time.deltaTime;
+        // ry += rotSpeed * mx * Time.deltaTime;
 
-        Vector3 velocity2 = dir * speed;
-        velocity2.y = yVelocity;
-        transform.eulerAngles = new Vector3(-rx, -90 + ry, 0);
-        cc.Move(velocity2 * Time.deltaTime);
+        // rx = Mathf.Clamp(rx, -80, 80);
+
+        // Vector3 velocity = dir * speed;
+        // velocity.y = yVelocity;
+        // transform.eulerAngles = new Vector3(-rx, -90 + ry, 0);
+        // cc.Move(velocity * Time.deltaTime);
 #else
         
 #endif
