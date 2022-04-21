@@ -22,8 +22,14 @@ public class Bomb : MonoBehaviour, BombInterface
     float buttonPullTime = 1f;
 
     // light GameObjects
+    [SerializeField]
     GameObject button;
+    [SerializeField]
     GameObject light;
+    [SerializeField]
+    GameObject head;
+
+
 
     // Patterns about Bomb
     [SerializeField]
@@ -47,17 +53,14 @@ public class Bomb : MonoBehaviour, BombInterface
 
     private void Start()
     {
-        //Set button and Light
-        button = transform.Find("Button").gameObject;
-        light = transform.Find("Light").gameObject;
 
         // ButtonPosition Setting
-        defaultPosition = transform.position;
-        pushedPosition = new Vector3(defaultPosition.x, defaultPosition.y, pushedZDistance);
+        defaultPosition = button.transform.position;
+        pushedPosition = defaultPosition + button.transform.up * pushedZDistance;
         //pullBack = new ButtonDeligate(PullButtonAndLightOff);
 
         //thisGamePattern = patterns[Random.Range(0, patterns.Count)];
-        thisGamePattern = patterns[4];
+        thisGamePattern = patterns[0];
         SetBomb(thisGamePattern);
 
         state = State.Normal;
@@ -100,7 +103,7 @@ public class Bomb : MonoBehaviour, BombInterface
     private void WarnningStateKeyDown()
     {
         bool isSuccess = false;
-        string second = (Timer.instance.curTime % 60).ToString();
+        string second = (/*Timer.instance.curTime*/ 50 % 60).ToString();
 
         switch (thisGamePattern.patternNum)
         {
@@ -126,7 +129,7 @@ public class Bomb : MonoBehaviour, BombInterface
     private void WarnningStateKeyUp()
     {
         bool isSuccess = false;
-        string second = (Timer.instance.curTime % 60).ToString();
+        string second = "50";
 
         switch (thisGamePattern.patternNum)
         {
@@ -155,8 +158,8 @@ public class Bomb : MonoBehaviour, BombInterface
     public bool NormalStateTryDefuse()
     {
         bool isSuccess = false;
-        PushButton();
-        string second = (Timer.instance.curTime % 60).ToString();
+        //Timer 들어갈 곳.
+        string second = "55";
 
         isSuccess = FirstTimeCheck(second);
 
@@ -208,7 +211,7 @@ public class Bomb : MonoBehaviour, BombInterface
 
     private void SetBomb(ButtonBombPattern thisGamePattern)
     {
-        button.transform.Find("Head").GetComponent<MeshRenderer>().material.color = thisGamePattern.buttonColor;
+        head.GetComponent<MeshRenderer>().material.color = thisGamePattern.buttonColor;
 
         button.GetComponentInChildren<Text>().text = thisGamePattern.buttonText;
     }
@@ -222,6 +225,7 @@ public class Bomb : MonoBehaviour, BombInterface
 
     private void PushButton()
     {
+        isButtonPush = true;
         StartCoroutine(IEPushButton());
 
     }
@@ -229,7 +233,7 @@ public class Bomb : MonoBehaviour, BombInterface
     IEnumerator IEPushButton()
     {
         float timer = 0;
-        while (timer < buttonPushTime)
+        while (timer < buttonPushTime && isButtonPush)
         {
             timer += Time.deltaTime;
             button.transform.position = Vector3.Lerp(button.transform.position, pushedPosition, 0.05f);
@@ -238,15 +242,20 @@ public class Bomb : MonoBehaviour, BombInterface
        
     }
 
+    bool isButtonPush;
+
     private void PullButton()
     {
-        StartCoroutine(IEPullButton()) ;
+        isButtonPush = false;
+        StopCoroutine(IEPushButton());
+        StartCoroutine(IEPullButton());
     }
+
 
     IEnumerator IEPullButton()
     {
         float timer = 0;
-        while (timer < buttonPushTime)
+        while (timer < buttonPullTime)
         {
             timer += Time.deltaTime;
             button.transform.position = Vector3.Lerp(button.transform.position, defaultPosition, 0.05f);
