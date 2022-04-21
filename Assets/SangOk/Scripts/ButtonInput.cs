@@ -36,33 +36,34 @@ public class ButtonInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            clickCount--;
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.transform.tag == "buttons")
+                if (Input.GetMouseButtonDown(0) && hit.transform.tag == "buttons")
                 {
-                    hit.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.color = Color.green;
-                }
+                    clickCount--;
+                    hit.transform.GetChild(0).gameObject.GetComponent<Renderer>()
+                        .material.color = Color.green;
 
-                if (objName[0] == null)
-                {
-                    objName[0] = hit.transform.name;
 
-                }
-                else if (objName[0] != null && objName[1] == null)
-                {
-                    objName[1] = hit.transform.name;
-                }
-                else if (objName[1] != null && objName[2] == null)
-                {
-                    objName[2] = hit.transform.name;
-                }
-                else if (objName[2] != null && objName[3] == null)
-                {
-                    objName[3] = hit.transform.name;
+                    if (objName[0] == null)
+                    {
+                        objName[0] = hit.transform.name;
+
+                    }
+                    else if (objName[0] != null && objName[1] == null)
+                    {
+                        objName[1] = hit.transform.name;
+                    }
+                    else if (objName[1] != null && objName[2] == null)
+                    {
+                        objName[2] = hit.transform.name;
+                    }
+                    else if (objName[2] != null && objName[3] == null)
+                    {
+                        objName[3] = hit.transform.name;
+                    }
                 }
             }
             for (int i = 0; i < objName.Length; i++)
