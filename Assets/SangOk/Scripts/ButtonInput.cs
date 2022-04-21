@@ -8,6 +8,9 @@ public class ButtonInput : MonoBehaviour
     string[] objName = new string[4];
     public int clickCount = 4;
     string[] correctAnswer = new string[4];
+    public GameObject buttonInputSound;
+    public GameObject failedSound;
+    public GameObject successedSound;
 
 
     enum State
@@ -42,6 +45,8 @@ public class ButtonInput : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0) && hit.transform.tag == "buttons")
                 {
+
+                    buttonInputSound.GetComponent<AudioSource>().Play();
                     clickCount--;
                     hit.transform.GetChild(0).gameObject.GetComponent<Renderer>()
                         .material.color = Color.green;
@@ -103,23 +108,34 @@ public class ButtonInput : MonoBehaviour
         switch (state)
         {
             case State.Success:
-               
+                successedSound.GetComponent<AudioSource>().Play();
 
                 break;
-
             case State.Fail:
+
                 clickCount = 4;
                 objName = new string[4];
-                for(int i = 0; i < buttons.Length; i++)
-                {
-                    buttons[i].GetComponent<Renderer>().material.color = Color.black;
-                }
+                StartCoroutine("FailedGlow", 0);
+                failedSound.GetComponent<AudioSource>().Play();
                 state = State.Playing;
                 
                 break;
         }
     }
 
+    IEnumerator FailedGlow()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponent<Renderer>().material.color= Color.red;
+        }
+        yield return new WaitForSeconds(2);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponent<Renderer>().material.color = Color.black;
+        }
+    }
    
+    
 
 }
