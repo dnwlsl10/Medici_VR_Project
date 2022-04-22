@@ -13,6 +13,7 @@ public class DoorColorRandom : MonoBehaviour
     }
     public MeshRenderer[] doors;
     public ColorInfo[] infos;
+    public Outline[] outlines;
     int randValue;
     public GameObject bomb;
     void Start()
@@ -28,5 +29,21 @@ public class DoorColorRandom : MonoBehaviour
     void SetBombPosition(int randValue)
     {
         bomb.transform.position = infos[randValue].bombPosition.position;
+    }
+
+    public void OnOutline()
+    {
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastEnter();
+        }
+    }
+
+    public void OffOutline()
+    {
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastExit();
+        }
     }
 }

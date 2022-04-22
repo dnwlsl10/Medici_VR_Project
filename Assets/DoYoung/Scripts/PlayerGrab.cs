@@ -8,6 +8,7 @@ public class PlayerGrab : MonoBehaviour
     public LineRenderer lr;
     public Transform bombPosition;
     bool isBombHold;
+    DoorColorRandom doorColorRandom;
     RaycastHit hitInfo = new RaycastHit();
 
     void Update()
@@ -31,6 +32,12 @@ public class PlayerGrab : MonoBehaviour
             if (Physics.Raycast(Lhand.position, Lhand.forward, out hitInfo))
             {
                 lr.SetPosition(1, hitInfo.point);
+
+                if(hitInfo.transform.tag == "door")
+                {
+                    doorColorRandom =  hitInfo.collider.GetComponentInParent<DoorColorRandom>();
+                    doorColorRandom.OnOutline();
+                }
             }
 
         }
@@ -45,6 +52,12 @@ public class PlayerGrab : MonoBehaviour
             {
 
                 hitInfo.transform.gameObject.GetComponent<Door>().ActionDoor();
+               
+                if(doorColorRandom != null)
+                {
+                    doorColorRandom.OffOutline();
+                }
+       
 
             }
             else if (hitInfo.transform.tag == "Bomb")
