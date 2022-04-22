@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class ButtonBox : MonoBehaviour, BombInterface
 {
-
     // button push and pull position
     Vector3 defaultPosition;
     Vector3 pushedPosition;
@@ -57,14 +56,13 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     private void Start()
     {
-
         // ButtonPosition Setting
         defaultPosition = button.transform.position;
         pushedPosition = defaultPosition + button.transform.up * pushedZDistance;
         //pullBack = new ButtonDeligate(PullButtonAndLightOff);
 
-        //thisGamePattern = patterns[Random.Range(0, patterns.Count)];
-        thisGamePattern = patterns[0];
+        thisGamePattern = patterns[Random.Range(0, patterns.Count)];
+        //thisGamePattern = patterns[1];
         SetBomb(thisGamePattern);
 
         state = State.Normal;
@@ -74,6 +72,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
     // Update is called once per frame
     void Update()
     {
+        print(kdy_Timer.instance.TIME);
         switch (state)
         {
             case State.Normal:
@@ -107,7 +106,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
     public void WarnningStateKeyDown()
     {
         bool isSuccess = false;
-        string second = (/*Timer.instance.curTime*/ 50 % 60).ToString();
+        string second = ((int)(kdy_Timer.instance.TIME % 60 )).ToString();
 
         switch (thisGamePattern.patternNum)
         {
@@ -133,7 +132,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
     public void WarnningStateKeyUp()
     {
         bool isSuccess = false;
-        string second = "50";
+        string second = ((int)(kdy_Timer.instance.TIME % 60)).ToString();
 
         switch (thisGamePattern.patternNum)
         {
@@ -163,9 +162,8 @@ public class ButtonBox : MonoBehaviour, BombInterface
     {
         bool isSuccess = false;
         //Timer 들어갈 곳.
-        string second = "55";
-
-        isSuccess = FirstTimeCheck(second);
+        string temp = ((int)(kdy_Timer.instance.TIME)).ToString();
+        isSuccess = FirstTimeCheck(temp);
 
         CheckNormalSuccessAndChangeState(isSuccess);
 
