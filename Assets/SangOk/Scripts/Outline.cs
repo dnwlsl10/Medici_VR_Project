@@ -137,6 +137,18 @@ public class Outline : MonoBehaviour {
             UpdateMaterialProperties();
     }
   }
+    public void OnRayCastEnter()
+    {
+        gameObject.GetComponent<Outline>().enabled = true;
+    }
+
+    public void OnRayCastExit()
+    {
+        gameObject.GetComponent<Outline>().enabled = false;
+    }
+
+
+/*
     private void OnMouseEnter()
     {
         gameObject.GetComponent<Outline>().enabled = true;
@@ -146,7 +158,7 @@ public class Outline : MonoBehaviour {
     private void OnMouseExit()
     {
         gameObject.GetComponent<Outline>().enabled = false;
-    }
+    }*/
     void OnDisable() {
     foreach (var renderer in renderers) {
 

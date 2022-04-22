@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueWire : WireBox
+public class BlueWire : MonoBehaviour
 {
+    public Outline[] outlines;
     public GameObject effect;
     public GameObject point;
+    public System.Action<string> OnAction;
 
-    public void Init(System.Action callback)
+    public void Init()
     {
-        Debug.Log("1");
+        if (!this.point.activeSelf)
+        {
+            return;
+        }
         this.effect.SetActive(true);
         this.point.SetActive(false);
-        callback();
+        OnAction(this.gameObject.tag);
     }
 
-    public override void OnCompare(string tag)
+    public void OnOutline()
     {
-        base.OnCompare(tag);
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastEnter();
+        }
+    }
+
+    public void OffOutline()
+    {
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastExit();
+        }
     }
 }

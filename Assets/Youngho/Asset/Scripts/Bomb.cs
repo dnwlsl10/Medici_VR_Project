@@ -40,6 +40,9 @@ public class Bomb : MonoBehaviour, BombInterface
     string nowSecond;
 
 
+    //light
+    public Lights buttonBoxLight;
+
     //Bomb State
     enum State
     {
@@ -270,6 +273,10 @@ public class Bomb : MonoBehaviour, BombInterface
     public bool Fail()
     {
         print("실패시 나올 자립니다.");
+        buttonBoxLight.OnFail(() =>
+        {
+            BombManager.instance.OnFailButtonBox();
+        });
         return false;
     }
 
@@ -283,7 +290,7 @@ public class Bomb : MonoBehaviour, BombInterface
 }
 
 
-
+/*
 [Serializable]
 struct ButtonBombPattern
 {
@@ -307,5 +314,5 @@ struct ButtonBombPattern
     }
 
 }
-
+*/
 

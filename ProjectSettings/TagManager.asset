@@ -17,6 +17,12 @@ TagManager:
   - button f1
   - button f6
   - Bomb
+  - buttons
+  - ButtonBox
+  - ButtonA
+  - ButtonB
+  - ButtonC
+  - ButtonD
   layers:
   - Default
   - TransparentFX

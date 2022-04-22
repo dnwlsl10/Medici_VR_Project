@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ButtonInput : MonoBehaviour
 {
+    public Lights buttonBoxLight;
     public GameObject[] buttons;
     string[] objName = new string[4];
     public int clickCount = 4;
@@ -11,6 +12,7 @@ public class ButtonInput : MonoBehaviour
     public GameObject buttonInputSound;
     public GameObject failedSound;
     public GameObject successedSound;
+    public Outline[] outlines;
 
 
     enum State
@@ -35,51 +37,37 @@ public class ButtonInput : MonoBehaviour
         correctAnswer[3] = "D";
         state = State.Playing;
     }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (Input.GetMouseButtonDown(0) && hit.transform.tag == "buttons")
-                {
 
-                    buttonInputSound.GetComponent<AudioSource>().Play();
-                    clickCount--;
-                    hit.transform.GetChild(0).gameObject.GetComponent<Renderer>()
+   public void Test(RaycastHit raycastHit)
+    {
+            buttonInputSound.GetComponent<AudioSource>().Play();
+            clickCount--;
+            raycastHit.transform.GetChild(0).gameObject.GetComponent<Renderer>()
                         .material.color = Color.green;
 
-
-                    if (objName[0] == null)
-                    {
-                        objName[0] = hit.transform.name;
-
-                    }
-                    else if (objName[0] != null && objName[1] == null)
-                    {
-                        objName[1] = hit.transform.name;
-                    }
-                    else if (objName[1] != null && objName[2] == null)
-                    {
-                        objName[2] = hit.transform.name;
-                    }
-                    else if (objName[2] != null && objName[3] == null)
-                    {
-                        objName[3] = hit.transform.name;
-                    }
-                }
+            if (objName[0] == null)
+            {
+                objName[0] = raycastHit.transform.name;
             }
-            for (int i = 0; i < objName.Length; i++)
+            else if (objName[0] != null && objName[1] == null)
+            {
+                objName[1] = raycastHit.transform.name;
+            }
+            else if (objName[1] != null && objName[2] == null)
+            {
+                objName[2] = raycastHit.transform.name;
+            }
+            else if (objName[2] != null && objName[3] == null)
+            {
+                objName[3] = raycastHit.transform.name;
+            }
+
+            for (int i = 0; i<objName.Length; i++)
             {
                 print(objName[i]);
             }
             CompareNameArray();
-            
-        }
-
-        ChangeState();
+            ChangeState();
     }
 
     void CompareNameArray()
@@ -109,7 +97,8 @@ public class ButtonInput : MonoBehaviour
         {
             case State.Success:
                 successedSound.GetComponent<AudioSource>().Play();
-
+                buttonBoxLight.OnSucess();
+                BombManager.instance.OnSucessButtonBox();
                 break;
             case State.Fail:
 
@@ -118,7 +107,10 @@ public class ButtonInput : MonoBehaviour
                 StartCoroutine("FailedGlow", 0);
                 failedSound.GetComponent<AudioSource>().Play();
                 state = State.Playing;
-                
+                buttonBoxLight.OnFail(() =>
+                {
+                    BombManager.instance.OnFailButtonBox();
+                });
                 break;
         }
     }
@@ -135,7 +127,5 @@ public class ButtonInput : MonoBehaviour
             buttons[i].GetComponent<Renderer>().material.color = Color.black;
         }
     }
-   
-    
 
 }
