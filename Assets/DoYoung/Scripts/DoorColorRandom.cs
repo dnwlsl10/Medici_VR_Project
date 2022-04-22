@@ -12,6 +12,7 @@ public class DoorColorRandom : MonoBehaviour
     }
     public MeshRenderer[] doors;
     public ColorInfo[] infos;
+    public Outline[] outlines;
     int randValue;
     void Start()
     {
@@ -20,6 +21,22 @@ public class DoorColorRandom : MonoBehaviour
         for (int i = 0; i < doors.Length; i++)
         {
             doors[i].material = infos[randValue].mat;
+        }
+    }
+
+    public void OnOutline()
+    {
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastEnter();
+        }
+    }
+
+    public void OffOutline()
+    {
+        for (int i = 0; i < outlines.Length; i++)
+        {
+            outlines[i].OnRayCastExit();
         }
     }
 }
