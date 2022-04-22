@@ -38,6 +38,7 @@ public class ButtonInput : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
+        //Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -76,7 +77,7 @@ public class ButtonInput : MonoBehaviour
                 print(objName[i]);
             }
             CompareNameArray();
-            
+
         }
 
         ChangeState();
@@ -84,12 +85,12 @@ public class ButtonInput : MonoBehaviour
 
     void CompareNameArray()
     {
-        if(clickCount == 0 && 
+        if (clickCount == 0 &&
             objName[0] == correctAnswer[0] &&
             objName[1] == correctAnswer[1] &&
-            objName[2] == correctAnswer[2] && 
+            objName[2] == correctAnswer[2] &&
             objName[3] == correctAnswer[3])
-        {                     
+        {
             state = State.Success;
             print(state);
         }
@@ -98,7 +99,7 @@ public class ButtonInput : MonoBehaviour
             objName[1] != correctAnswer[1] ||
             objName[2] != correctAnswer[2] ||
             objName[3] != correctAnswer[3]))
-        {       
+        {
             state = State.Fail;
             print(state);
         }
@@ -118,24 +119,32 @@ public class ButtonInput : MonoBehaviour
                 StartCoroutine("FailedGlow", 0);
                 failedSound.GetComponent<AudioSource>().Play();
                 state = State.Playing;
-                
+
                 break;
         }
     }
 
+
+
     IEnumerator FailedGlow()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        int count = 0;
+        while (count < 4)
         {
-            buttons[i].GetComponent<Renderer>().material.color= Color.red;
-        }
-        yield return new WaitForSeconds(2);
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].GetComponent<Renderer>().material.color = Color.black;
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].GetComponent<Renderer>().material.color = Color.red;
+            }
+            yield return new WaitForSeconds(0.5f);
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].GetComponent<Renderer>().material.color = Color.black;
+            }
+            yield return new WaitForSeconds(0.5f);
+            count++;
         }
     }
-   
-    
+
+
 
 }
