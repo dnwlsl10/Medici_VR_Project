@@ -12937,34 +12937,34 @@ MonoBehaviour:
     lightColor: {r: 1, g: 0.97145116, b: 0, a: 1}
     buttonText: HOLD
     startTime: 55
-    endTime: 53
+    endTime: 30
     isKeepButtonPush: 1
   - patternNum: 1
     buttonColor: {r: 1, g: 0.38039216, b: 0.38039216, a: 1}
     lightColor: {r: 0.021567345, g: 0, b: 1, a: 1}
     buttonText: PUSH
-    startTime: 57
-    endTime: 54
+    startTime: 45
+    endTime: 30
     isKeepButtonPush: 0
   - patternNum: 2
     buttonColor: {r: 0.2979263, g: 0.3892439, b: 0.9716981, a: 1}
     lightColor: {r: 0.021567345, g: 0, b: 1, a: 1}
     buttonText: HOLD
-    startTime: 55
-    endTime: 53
+    startTime: 50
+    endTime: 30
     isKeepButtonPush: 0
   - patternNum: 3
     buttonColor: {r: 0.2979263, g: 0.3892439, b: 0.9716981, a: 1}
     lightColor: {r: 0, g: 1, b: 0.30873346, a: 1}
     buttonText: PUSH
-    startTime: 55
-    endTime: 53
+    startTime: 30
+    endTime: 10
     isKeepButtonPush: 1
   - patternNum: 4
     buttonColor: {r: 0.2979263, g: 0.3892439, b: 0.9716981, a: 1}
     lightColor: {r: 1, g: 0.9180699, b: 0, a: 1}
     buttonText: PUSH
-    startTime: 55
+    startTime: 30
     endTime: 53
     isKeepButtonPush: 1
   buttonBoxLight: {fileID: 6511475443123561521}
