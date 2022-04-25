@@ -52,7 +52,10 @@ public class kdy_Timer : MonoBehaviour
 
     void Update()
     {
-        TIME -= Time.deltaTime;
+        if (!BombManager.instance.isFail)
+        {
+            TIME -= Time.deltaTime;
+        }
     }
 
     public float ConvertToTotalSeconds(int hours, int minutes, int seconds)

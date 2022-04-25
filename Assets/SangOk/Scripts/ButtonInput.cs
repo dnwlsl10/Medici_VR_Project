@@ -122,6 +122,16 @@ public class ButtonInput : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (BombManager.instance.isFail)
+        {
+            for(int i = 0; i< buttons.Length; i++)
+            {
+                buttons[i].GetComponent<Renderer>().material.color = Color.red;
+            }
+        }
+    }
 
     IEnumerator FailedGlow()
     {

@@ -61,8 +61,8 @@ public class ButtonBox : MonoBehaviour, BombInterface
         pushedPosition = defaultPosition + button.transform.up * pushedZDistance;
         //pullBack = new ButtonDeligate(PullButtonAndLightOff);
 
-        thisGamePattern = patterns[Random.Range(0, patterns.Count)];
-        //thisGamePattern = patterns[1];
+        //thisGamePattern = patterns[Random.Range(0, patterns.Count)];
+        thisGamePattern = patterns[1];
         SetBomb(thisGamePattern);
 
         state = State.Normal;
@@ -72,7 +72,6 @@ public class ButtonBox : MonoBehaviour, BombInterface
     // Update is called once per frame
     void Update()
     {
-        print(kdy_Timer.instance.TIME);
         switch (state)
         {
             case State.Normal:
@@ -188,6 +187,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
         {
             state = State.Warnning;
             ChangeLightColor(thisGamePattern.lightColor);
+            
         }
         else
         {
@@ -203,6 +203,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
         {
             state = State.Success;
             ChangeLightColor(Color.green);
+            Success();
         }
         else
         {
@@ -281,6 +282,8 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public bool Success()
     {
+        buttonBoxLight.OnSucess();
+        BombManager.instance.OnSucessButtonBox();
         print("성공시 나올 자립니다.");
         return true;
     }

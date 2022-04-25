@@ -206,6 +206,7 @@ public class BreakableWindow : MonoBehaviour {
                 {
                     for (int i = 0; i < splinters.Count; i++)
                     {
+                        if(!splinters[i])
                         splinters[i].GetComponent<Rigidbody>().isKinematic = false;
                         splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
                         splinters[i].GetComponent<Rigidbody>().AddForce(new Vector3(1,2,1) * 3, ForceMode.Impulse);

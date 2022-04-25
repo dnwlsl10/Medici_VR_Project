@@ -33,16 +33,11 @@ public class PlayerGrab : MonoBehaviour
             {
                 lr.SetPosition(1, hitInfo.point);
 
-                if (hitInfo.transform.tag == "door")
+                if(hitInfo.transform.tag == "door")
                 {
-                    doorColorRandom = hitInfo.collider.GetComponentInParent<DoorColorRandom>();
+                    doorColorRandom =  hitInfo.collider.GetComponentInParent<DoorColorRandom>();
                     doorColorRandom.OnOutline();
                 }
-            }
-            else
-            {
-                lr.SetPosition(1, ray.origin + ray.direction * 10);
-
             }
 
         }
@@ -57,12 +52,12 @@ public class PlayerGrab : MonoBehaviour
             {
 
                 hitInfo.transform.gameObject.GetComponent<Door>().ActionDoor();
-
-                if (doorColorRandom != null)
+               
+                if(doorColorRandom != null)
                 {
                     doorColorRandom.OffOutline();
                 }
-
+       
 
             }
             else if (hitInfo.transform.tag == "Bomb")

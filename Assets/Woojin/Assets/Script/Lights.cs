@@ -6,7 +6,10 @@ public class Lights : MonoBehaviour
 {
     public GameObject lightSphere;
     public GameObject light;
-    
+
+    public Material battery;
+    public Material lastBattery;
+
     [SerializeField]
     Material defaultLightSphereMat;
     [SerializeField]
@@ -19,28 +22,76 @@ public class Lights : MonoBehaviour
     Material greenLightSphereMat;
     [SerializeField]
     Color greenLightColor;
+    bool isSucess;
+    bool isFail;
+    public void Update()
+    {
+        if (BombManager.instance.isFail)
+        {
+            battery.SetColor("_EmissionColor", Color.red);
+            lastBattery.SetColor("_EmissionColor", Color.red);
+        }
+    }
+
+    IEnumerator OnEissionColor()
+    {
+        while (!isSucess)
+        {
+            battery.SetColor("_EmissionColor", Color.red);
+            yield return new WaitForSeconds(1f);
+            battery.SetColor("_EmissionColor", Color.black);
+            yield return new WaitForSeconds(1f);
+
+            if (BombManager.instance.isFail)
+            {
+                break;
+            }
+        }
+    }
+
+    IEnumerator OnEissionLastColor()
+    {
+        while (!BombManager.instance.isSucess)
+        {
+            lastBattery.SetColor("_EmissionColor", Color.red);
+            yield return new WaitForSeconds(1f);
+            lastBattery.SetColor("_EmissionColor", Color.black);
+            yield return new WaitForSeconds(1f);
+
+            if (BombManager.instance.isFail)
+            {
+                break;
+            }
+        }
+    }
 
     public void Start()
     {
+        battery.SetColor("_EmissionColor", Color.black);
+        lastBattery.SetColor("_EmissionColor", Color.black);
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = defaultLightSphereMat;
         light.GetComponent<Light>().color = defaultColor;
         BombManager.OnFailEventLight += OnRedLight;
+        StartCoroutine(OnEissionColor());
+        StartCoroutine(OnEissionLastColor());
     }
     public void OnSucess()
     {
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = greenLightSphereMat;
         light.GetComponent<Light>().color = greenLightColor;
+        isSucess = true;
+
     }
 
     public void OnFail(System.Action OnRedLight)
     {
-        Debug.Log("1");
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = redLightSphereMat;
         light.GetComponent<Light>().color = redLightColor;
         StartCoroutine(OnActionRedLight(OnRedLight));
+        BombManager.instance.isFail = true;
     }
 
 

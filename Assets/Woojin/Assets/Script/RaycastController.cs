@@ -109,20 +109,21 @@ public class RaycastController : MonoBehaviour
         }
     }
 
-
+    bool isBreakWindow;
     void OnActionWindow()
     {
         if (hitOut.collider.CompareTag("Window"))
         {
             BreakableWindow window = hitOut.collider.gameObject.GetComponent<BreakableWindow>();
             window.OnBreakWindow();
+            isBreakWindow = true;
         }
     }
 
 
     void OnActionButtonBox()
     {
-        if (hitOut.collider.CompareTag("ButtonBox"))
+        if (isBreakWindow && hitOut.collider.CompareTag("ButtonBox"))
         {
             buttonBox = hitOut.collider.gameObject.GetComponentInParent<ButtonBox>();
             buttonBox.outline.OnRayCastEnter();
@@ -132,6 +133,7 @@ public class RaycastController : MonoBehaviour
                 {
                     buttonBox.PushButton();
                     buttonBox.NormalStateTryDefuse();
+                    return;
                 }
                
             }
@@ -140,8 +142,9 @@ public class RaycastController : MonoBehaviour
             {
                 if (Input.GetButtonUp("Fire1"))
                 {
-                   buttonBox.PullButton();
-                   buttonBox.WarnningStateKeyUp();
+                    buttonBox.PullButton();
+                    buttonBox.WarnningStateKeyUp();
+                    return;
                 }
 
                 if (Input.GetButtonDown("Fire1"))
@@ -149,6 +152,7 @@ public class RaycastController : MonoBehaviour
                     buttonBox.PushButton();
 
                     buttonBox.WarnningStateKeyDown();
+                    return;
                 }
             }
         }
