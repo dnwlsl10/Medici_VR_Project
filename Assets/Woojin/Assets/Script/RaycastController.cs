@@ -24,12 +24,13 @@ public class RaycastController : MonoBehaviour
             this.OnOutlineWireBox();
             this.OnActionButtonBox();
             this.OnOutlineIMageBox();
-
+            this.OnOutlineArrowBox();
             if (Input.GetButtonDown("Fire1"))
             {
                 this.OnActionWindow();
                 this.OnActionWireBox();
                 this.OnActionImageBox();
+                this.OnActionArrowBox();
             }
         }
     }
@@ -228,5 +229,80 @@ public class RaycastController : MonoBehaviour
         }
     }
 
+    Monitor monitor;
+    void OnActionArrowBox()
+    {
+        if (hitOut.collider.CompareTag("RightButton"))
+        {
+            monitor = hitOut.collider.GetComponentInParent<Monitor>();
+            monitor.MoveLight(-1, 0);
+        }
+        else if (hitOut.collider.CompareTag("UpButton"))
+        {
+            monitor = hitOut.collider.GetComponentInParent<Monitor>();
+            monitor.MoveLight(-1, 0);
+        }
+        else if (hitOut.collider.CompareTag("DownButton"))
+        {
+            monitor = hitOut.collider.GetComponentInParent<Monitor>();
+            monitor.MoveLight(1, 0);
+        }
+        else if (hitOut.collider.CompareTag("LeftButton"))
+        {
+            monitor = hitOut.collider.GetComponentInParent<Monitor>();
+            monitor.MoveLight(0, -1);
+        }
+    }
+
+    Outline btnRight;
+    Outline btnLeft;
+    Outline btnUp;
+    Outline btnDown;
+    void OnOutlineArrowBox()
+    {
+        if (hitOut.collider.CompareTag("RightButton"))
+        {
+            btnRight = hitOut.collider.GetComponent<Outline>();
+            btnRight.OnRayCastEnter();
+        }
+        else
+        {
+            if (btnRight != null)
+                btnRight.OnRayCastExit();
+        }
+
+        if (hitOut.collider.CompareTag("UpButton"))
+        {
+             btnUp = hitOut.collider.GetComponent<Outline>();
+            btnUp.OnRayCastEnter();
+        }
+        else
+        {
+            if (btnUp != null)
+                btnUp.OnRayCastExit();
+        }
+
+        if (hitOut.collider.CompareTag("DownButton"))
+        {
+             btnDown = hitOut.collider.GetComponent<Outline>();
+            btnDown.OnRayCastEnter();
+        }
+        else
+        {
+            if (btnDown != null)
+                btnDown.OnRayCastExit();
+        }
+
+        if (hitOut.collider.CompareTag("LeftButton"))
+        {
+             btnLeft = hitOut.collider.GetComponent<Outline>();
+            btnLeft.OnRayCastEnter();
+        }
+        else
+        {
+            if (btnLeft != null)
+                btnLeft.OnRayCastExit();
+        }
+    }
 
 }

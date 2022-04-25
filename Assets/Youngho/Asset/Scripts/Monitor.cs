@@ -19,7 +19,7 @@ public class Monitor : MonoBehaviour , BombInterface
 
     ArrowBombPattern pattern;
 
-
+    public Lights arrowLight;
 
 
     // Start is called before the first frame update
@@ -61,15 +61,16 @@ public class Monitor : MonoBehaviour , BombInterface
         if (Input.GetKeyDown(KeyCode.S))
         {
             MoveLight(1, 0);
-
         }
-
-
     }
 
 
     public void MoveLight(int row, int col)
     {
+        if(isFail || isSucces)
+        {
+            return;
+        }
         print("before ::>>  row : " + this.row + "// addedRow :" + row + " // col :" + this.col + "//addedCol :" + col);
 
         if (this.row + row > 8 || this.row + row < 0 || this.col + col > 8 || this.col + col < 0)
@@ -101,14 +102,24 @@ public class Monitor : MonoBehaviour , BombInterface
 
     }
 
+    bool isFail;
+    bool isSucces;
     public bool Fail()
     {
         print("fail");
+        isFail = true;
+        arrowLight.OnFail(() =>
+        {
+            BombManager.instance.OnFailWireBox();
+        });
         return false;
     }
 
     public bool Success()
     {
+        isSucces = true;
+        arrowLight.OnSucess();
+        BombManager.instance.OnSucessWireBox();
         print("Success");
         return true;
     }

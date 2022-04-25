@@ -23,6 +23,10 @@ TagManager:
   - ButtonB
   - ButtonC
   - ButtonD
+  - RightButton
+  - LeftButton
+  - UpButton
+  - DownButton
   layers:
   - Default
   - TransparentFX
