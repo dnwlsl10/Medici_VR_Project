@@ -12,10 +12,33 @@ public class WireBox : MonoBehaviour , BombInterface
     public YellowWire yellowWire;
     protected List<string> candidate = new List<string>();
     public Lights wireBoxLight;
-    string[] question = { "RedWire", "BlueWire", "GreenWire", "YellowWire" };
+    string[] question;
     [SerializeField] int count;
     bool isFail;
 
+    public void OnMakePattern(eCode code)
+    {
+        if (code == eCode.Right)
+        {
+            question = new string[] { "GreenWire", "BlueWire", "RedWire", "YellowWire" };
+        }
+        if (code == eCode.Left)
+        {
+            question = new string[] { "GreenWire", "YellowWire", "RedWire", "BlueWire" };
+        }
+        if (code == eCode.Up)
+        {
+            question = new string[] { "RedWire", "BlueWire", "GreenWire", "YellowWire" };
+        }
+        if (code == eCode.Down)
+        {
+            question = new string[] { "RedWire", "YellowWire", "GreenWire", "BlueWire" };
+        }
+        if (code == eCode.Back)
+        {
+            question = new string[] { "RedWire", "GreenWire", "BlueWire", "YellowWire" };
+        }
+    }
     void Update()
     {
         redWire.OnAction = (tag) =>
