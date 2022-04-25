@@ -128,9 +128,9 @@ public class Monitor : MonoBehaviour , BombInterface
     public struct BombPosition
     {
         [SerializeField]
-        public int col;
-        [SerializeField]
         public int row;
+        [SerializeField]
+        public int col;
     }
 
     [Serializable]

@@ -9173,11 +9173,112 @@ MonoBehaviour:
   patterns:
   - startRow: 0
     startCol: 0
+    destinationRow: 8
+    destinationCol: 8
+    bombPositions:
+    - row: 0
+      col: 3
+    - row: 2
+      col: 3
+    - row: 3
+      col: 2
+    - row: 3
+      col: 4
+    - row: 7
+      col: 0
+    - row: 7
+      col: 2
+    - row: 7
+      col: 4
+    - row: 7
+      col: 6
+    - row: 2
+      col: 7
+    - row: 4
+      col: 7
+    - row: 6
+      col: 7
+    - row: 8
+      col: 7
+  - startRow: 8
+    startCol: 8
     destinationRow: 2
     destinationCol: 2
     bombPositions:
-    - col: 0
-      row: 1
+    - row: 5
+      col: 0
+    - row: 5
+      col: 2
+    - row: 7
+      col: 2
+    - row: 7
+      col: 4
+    - row: 6
+      col: 5
+    - row: 4
+      col: 5
+    - row: 2
+      col: 5
+    - row: 0
+      col: 5
+    - row: 2
+      col: 7
+    - row: 4
+      col: 7
+    - row: 6
+      col: 7
+    - row: 8
+      col: 7
+  - startRow: 4
+    startCol: 0
+    destinationRow: 4
+    destinationCol: 4
+    bombPositions:
+    - row: 3
+      col: 0
+    - row: 3
+      col: 2
+    - row: 4
+      col: 1
+    - row: 6
+      col: 1
+    - row: 7
+      col: 2
+    - row: 7
+      col: 4
+    - row: 7
+      col: 6
+    - row: 6
+      col: 7
+    - row: 4
+      col: 7
+    - row: 2
+      col: 7
+    - row: 1
+      col: 6
+  - startRow: 4
+    startCol: 4
+    destinationRow: 0
+    destinationCol: 6
+    bombPositions:
+    - row: 3
+      col: 2
+    - row: 3
+      col: 4
+    - row: 3
+      col: 6
+    - row: 5
+      col: 2
+    - row: 6
+      col: 3
+    - row: 2
+      col: 5
+    - row: 4
+      col: 5
+    - row: 6
+      col: 5
+    - row: 7
+      col: 6
   arrowLight: {fileID: 3595367303205054877}
 --- !u!1 &6223777642991747462
 GameObject:
