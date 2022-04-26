@@ -44,7 +44,9 @@ public class ButtonInput : MonoBehaviour
     {
             buttonInputSound.GetComponent<AudioSource>().Play();
             clickCount--;
-            raycastHit.transform.GetChild(0).gameObject.GetComponent<Renderer>()
+        Debug.Log(raycastHit);
+        Debug.Log(raycastHit.transform.GetChild(0).gameObject.name);
+            raycastHit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>()
                         .material.color = Color.green;
 
             if (objName[0] == null)

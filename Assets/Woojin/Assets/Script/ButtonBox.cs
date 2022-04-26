@@ -54,15 +54,15 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
    public State state;
 
-    private void Start()
+    void  Start()
     {
+       
         // ButtonPosition Setting
-        defaultPosition = button.transform.position;
-        pushedPosition = defaultPosition + button.transform.up * pushedZDistance;
+       
         //pullBack = new ButtonDeligate(PullButtonAndLightOff);
 
-        //thisGamePattern = patterns[Random.Range(0, patterns.Count)];
-        thisGamePattern = patterns[1];
+        thisGamePattern = patterns[Random.Range(0, patterns.Count)];
+
         SetBomb(thisGamePattern);
 
         state = State.Normal;
@@ -228,6 +228,8 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public void PushButton()
     {
+        defaultPosition = button.gameObject.transform.position;
+        pushedPosition = defaultPosition + button.gameObject.transform.up * pushedZDistance;
         isButtonPush = true;
         StartCoroutine(IEPushButton());
 
@@ -249,6 +251,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public void PullButton()
     {
+        Debug.Log("UpUPUPUPUPUPUPUPUPUP");
         isButtonPush = false;
         StopCoroutine(IEPushButton());
         StartCoroutine(IEPullButton());

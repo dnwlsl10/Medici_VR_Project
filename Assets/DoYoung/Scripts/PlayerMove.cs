@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    AudioSource walkSource;
     CharacterController cc;
     float rx;
     float ry;
@@ -24,7 +23,6 @@ public class PlayerMove : MonoBehaviour
         if (!cc.isGrounded)
         {
             yVelocity += gravity * Time.deltaTime;
-            walkSource = GetComponent<AudioSource>();
         }
 
         // if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))
@@ -36,19 +34,6 @@ public class PlayerMove : MonoBehaviour
             Vector3 velocity = dirMove * speed;
             velocity.y = yVelocity;
             cc.Move(velocity * Time.deltaTime);
-
-            if (dirMove != Vector3.zero)
-            {
-                if (!walkSource.isPlaying)
-                {
-                    walkSource.Play();
-                }
-            }
-            else
-            {
-                walkSource.Stop();
-            }
-
         }
 
         {

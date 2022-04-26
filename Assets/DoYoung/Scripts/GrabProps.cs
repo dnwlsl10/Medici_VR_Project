@@ -15,9 +15,14 @@ public class GrabProps : GrabberBase
     GameObject grabObject = null;
     public OVRInput.Controller hand;
     public float kAdjustForce = 3f;
+    int props;
     RaycastHit hitInfo;
     Ray ray;
-    Grabbable mg;
+    void Start()
+    {
+        props = 1 << LayerMask.NameToLayer("object");
+    }
+
 
     void Update()
     {
@@ -26,9 +31,7 @@ public class GrabProps : GrabberBase
             ray = new Ray(transform.position, transform.forward);
 
             bool isHit = Physics.Raycast(ray, out hitInfo);
-
             lr.SetPosition(0, ray.origin);
-
             if (isHit)
             {
                 lr.SetPosition(1, hitInfo.point);
@@ -37,11 +40,10 @@ public class GrabProps : GrabberBase
             {
                 lr.SetPosition(1, ray.origin + ray.direction * 10);
             }
-
             if (isHit && OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
             {
 
-                mg = hitInfo.transform.GetComponent<Grabbable>();
+                Grabbable mg = hitInfo.transform.GetComponent<Grabbable>();
                 if (mg)
                 {
                     //만약 이미 잡고 있는 물체라면 그 손에게 놓으라고 해야 함
@@ -56,7 +58,7 @@ public class GrabProps : GrabberBase
                 }
             }
         }
-        else if (mg)
+        else
         {
             grabObject.transform.localPosition = Vector3.Lerp(grabObject.transform.localPosition, grabPosition.localPosition, Time.deltaTime * 5);
             grabObject.transform.rotation = Quaternion.Lerp(grabObject.transform.rotation, grabPosition.rotation, Time.deltaTime * 5);

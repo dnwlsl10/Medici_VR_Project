@@ -12,9 +12,8 @@ public class PlayerGrab : MonoBehaviour
     RaycastHit hitInfo = new RaycastHit();
     Outline outLine;
     public bool isMoused;
-    public List<GameObject> highlightedDoors;
-    GameObject grapedBomb;
-    public float bombRoteAcel = 5;
+    public GameObject allDoor;
+
 
     private void Start()
     {
@@ -23,18 +22,11 @@ public class PlayerGrab : MonoBehaviour
 
     void Update()
     {
-
         OnLeftHandButton();
 
         OnLeftHandButtonUp();
 
         BombHold();
-
-        if (isBombHold)
-        {
-            RatatebombByHandGrip();
-        }
-
     }
 
     void OnLeftHandButton()
@@ -43,25 +35,23 @@ public class PlayerGrab : MonoBehaviour
         lr.SetPosition(0, ray.origin);
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
         {
+            isMoused = true;
             lr.enabled = true;
+
 
             if (Physics.Raycast(Lhand.position, Lhand.forward, out hitInfo))
             {
                 lr.SetPosition(1, hitInfo.point);
 
-                if (hitInfo.transform.tag == "door")
+                if (hitInfo.transform.tag == "door" && isMoused == true && hitInfo.collider != null )
                 {
-                    if (highlightedDoors.Contains(hitInfo.collider.gameObject))
-                    {
-                        return;
-                    }
-                    highlightedDoors.Add(hitInfo.collider.gameObject);
-                    outLine = hitInfo.transform.gameObject.AddComponent<Outline>().GetComponent<Outline>();
+                    doorColorRandom = hitInfo.collider.GetComponentInParent<DoorColorRandom>();
+                    outLine = hitInfo.transform.gameObject.GetComponent<Outline>();
+                    if (outLine == null)
+                        outLine = hitInfo.transform.gameObject.AddComponent<Outline>();
+
                     outLine.OnRayCastEnter();
-                }
-                else
-                {
-                    ClearOutline();
+
                 }
 
             }
@@ -74,73 +64,59 @@ public class PlayerGrab : MonoBehaviour
         }
 
 
+
+
+
+
     }
 
     void OnLeftHandButtonUp()
     {
         if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
         {
-
-            ClearOutline();
-
+            isMoused = false;
+            if (isMoused == false)
+            {
+                Transform[] allChildren = allDoor.GetComponentsInChildren<Transform>();
+                foreach(Transform child in allChildren)
+                {
+                    Destroy(child.gameObject.GetComponent<Outline>());
+                }
+            }
             lr.enabled = false;
             if (hitInfo.transform.tag == "door")
             {
+
                 hitInfo.transform.gameObject.GetComponent<Door>().ActionDoor();
 
+
+            }
+            else if (hitInfo.transform.tag == "Bomb")
+            {
+                isBombHold = !isBombHold;
             }
         }
     }
     void BombHold()
     {
-        if (isBombHold)
-        {
-            grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
-        }
+        if (hitInfo.transform == null) return;
 
-        if (hitInfo.transform == null)
+        if (isBombHold && (hitInfo.collider.tag == "Bomb"))
+        {
+            hitInfo.transform.GetComponent<Rigidbody>().isKinematic = true;
+            hitInfo.transform.parent = transform;
+            hitInfo.transform.position = Vector3.Lerp(hitInfo.transform.position, bombPosition.position, Time.deltaTime * 2);
+            hitInfo.transform.rotation = bombPosition.rotation;
+        }
+        else if (!isBombHold && (hitInfo.collider.tag == "Bomb"))
+        {
+            hitInfo.transform.GetComponent<Rigidbody>().isKinematic = false;
+            hitInfo.transform.parent = null;
+        }
+        else
         {
             return;
         }
-
-        if (hitInfo.collider.tag == "Bomb")
-        {
-            isBombHold = true;
-            grapedBomb = hitInfo.collider.gameObject;
-            grapedBomb.GetComponent<Rigidbody>().isKinematic = true;
-            grapedBomb.transform.parent = transform;
-        }
-
     }
 
-
-    void RatatebombByHandGrip()
-    {
-
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
-        {
-            Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch);
-            Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
-            print("rotateDir =" + dir);
-            grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
-        }
-
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
-        {
-            Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
-            Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
-            print("rotateDir =" + dir);
-            grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
-        }
-    }
-
-    void ClearOutline()
-    {
-        for (int i = highlightedDoors.Count - 1; i >= 0; i--)
-        {
-            GameObject.DestroyImmediate(highlightedDoors[i].GetComponent<Outline>());
-            highlightedDoors.Remove(highlightedDoors[i]);
-        }
-
-    }
 }

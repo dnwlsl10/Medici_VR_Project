@@ -46,6 +46,7 @@ public class BreakableWindow : MonoBehaviour {
     private bool allreadyCalculated = false;
     private GameObject splinterParent;
     int[] tris;
+    bool isTrue;
 
     void Start()
     {
@@ -134,7 +135,7 @@ public class BreakableWindow : MonoBehaviour {
         obj.transform.rotation = transform.rotation;
         obj.layer = layer.value;
         obj.name = "Glass Splinter";
-        if (destroySplintersTime > 0)
+        if(destroySplintersTime > 0)
             Destroy(obj, destroySplintersTime);
 
 
@@ -143,7 +144,7 @@ public class BreakableWindow : MonoBehaviour {
             obj.transform.parent = parent;
         }
 
-        if (hideSplintersInHierarchy) obj.hideFlags = HideFlags.HideInHierarchy;
+        //if (hideSplintersInHierarchy) obj.hideFlags = HideFlags.HideInHierarchy;
         splinters.Add(obj);
 
         MeshFilter mf = obj.AddComponent<MeshFilter>();
@@ -152,15 +153,16 @@ public class BreakableWindow : MonoBehaviour {
         MeshCollider col = obj.AddComponent<MeshCollider>();
         col.inflateMesh = true;
         col.convex = true;
-        if (destroyPhysicsTime > 0 && destroyColliderWithPhysics) Destroy(col, destroyPhysicsTime);
+    /*    if (destroyPhysicsTime > 0 && destroyColliderWithPhysics) Destroy(col, destroyPhysicsTime);*/
         
         Rigidbody rigid = obj.AddComponent<Rigidbody>();
         rigid.centerOfMass = (v[0] + v[1] + v[2]) / 3f;
         if (addTorques && preCalculate == false) rigid.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
-        if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
+        //if (destroyPhysicsTime > 0) Destroy(rigid, destroyPhysicsTime);
 
         MeshRenderer mr = obj.AddComponent<MeshRenderer>();
         mr.materials = GetComponent<Renderer>().materials;
+        Debug.Log("test");
     }
 
     private void bakeSplinters()
@@ -206,10 +208,10 @@ public class BreakableWindow : MonoBehaviour {
                 {
                     for (int i = 0; i < splinters.Count; i++)
                     {
-                        if(!splinters[i])
+                        
                         splinters[i].GetComponent<Rigidbody>().isKinematic = false;
                         splinters[i].GetComponent<Rigidbody>().AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
-                        splinters[i].GetComponent<Rigidbody>().AddForce(new Vector3(1,2,1) * 3, ForceMode.Impulse);
+                       // splinters[i].GetComponent<Rigidbody>().AddForce(new Vector3(1,2,1) * 3, ForceMode.Impulse);
                         splinters[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
                    
                         StartCoroutine(OffTigger(splinters));
@@ -273,14 +275,9 @@ public class BreakableWindow : MonoBehaviour {
 
     public void OnBreakWindow()
     {
-        if (health > 0)
+        if (useCollision == true)
         {
-            if (health < 0)
-            {
-                health = 0;
-                breakWindow();
-            }
+            breakWindow();
         }
-        else breakWindow();
     }
 }

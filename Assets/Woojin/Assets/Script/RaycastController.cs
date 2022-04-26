@@ -10,9 +10,54 @@ public class RaycastController : MonoBehaviour
     private BlueWire blueWire;
     private YellowWire yellowWire;
     private ButtonBox buttonBox;
+
+    public OVRInput.Controller hand;
+    private LineRenderer lr;
+    private Ray ray;
+
+
+    private void Start()
+    {
+        lr = this.GetComponent<LineRenderer>();
+    }
     private void Update()
     {
-        this.OnRayCastButtonDown();
+        //this.OnRayCastButtonDown();
+        this.OcculusRayCast();
+    }
+
+    void OcculusRayCast()
+    {
+        ray = new Ray(transform.position, transform.forward);
+
+        bool isHit = Physics.Raycast(ray, out hitOut);
+      
+        lr.SetPosition(0, ray.origin);
+        if (isHit)
+        {
+            Debug.Log(hitOut.collider.tag);
+            lr.SetPosition(1, hitOut.point);
+            this.OnOutlineWireBox();
+            this.OnActionButtonBox();
+            this.OnOutlineIMageBox();
+            this.OnOutlineArrowBox();
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
+            {
+                Debug.Log("test");
+                this.OnActionWindow();
+                this.OnActionWireBox();
+                this.OnActionImageBox();
+                this.OnActionArrowBox();
+            }
+        }
+        else
+        {
+            lr.SetPosition(1, ray.origin + ray.direction * 10);
+        }
+
+
+       
+
     }
 
     void OnRayCastButtonDown()
@@ -113,6 +158,7 @@ public class RaycastController : MonoBehaviour
     bool isBreakWindow;
     void OnActionWindow()
     {
+      
         if (hitOut.collider.CompareTag("Window"))
         {
             BreakableWindow window = hitOut.collider.gameObject.GetComponent<BreakableWindow>();
@@ -130,7 +176,7 @@ public class RaycastController : MonoBehaviour
             buttonBox.outline.OnRayCastEnter();
             if (buttonBox.state == ButtonBox.State.Normal)
             {
-                if(Input.GetButtonDown("Fire1"))
+                if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
                     buttonBox.PushButton();
                     buttonBox.NormalStateTryDefuse();
@@ -139,19 +185,23 @@ public class RaycastController : MonoBehaviour
                
             }
 
+
+
             if (buttonBox.state == ButtonBox.State.Warnning)
             {
-                if (Input.GetButtonUp("Fire1"))
+                if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
+
+                    Debug.Log("UpUPUPUPUPUPUPUPUPUP");
                     buttonBox.PullButton();
                     buttonBox.WarnningStateKeyUp();
+                  
                     return;
                 }
 
-                if (Input.GetButtonDown("Fire1"))
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
                     buttonBox.PushButton();
-
                     buttonBox.WarnningStateKeyDown();
                     return;
                 }
