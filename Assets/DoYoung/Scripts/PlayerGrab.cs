@@ -36,7 +36,7 @@ public class PlayerGrab : MonoBehaviour
                 if(hitInfo.transform.tag == "door")
                 {
                     doorColorRandom =  hitInfo.collider.GetComponentInParent<DoorColorRandom>();
-                    doorColorRandom.OnOutline();
+                   // doorColorRandom.OnOutline();
                 }
             }
 

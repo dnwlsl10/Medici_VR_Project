@@ -9,7 +9,7 @@ public class InGame : MonoBehaviour
     public Transform[] bombTarget;
     private void Start()
     {
-        Init();
+       
     }
 
 
