@@ -24,7 +24,8 @@ public class DoorColorRandom : MonoBehaviour
         {
             doors[i].material = infos[randValue].mat;
         }
-        bomb.transform.position = infos[randValue].bombPosition.position;
+
+        bomb.transform.position =  infos[randValue].bombPosition.position;
     }
 
 }
