@@ -9,12 +9,10 @@ public class DoorColorRandom : MonoBehaviour
     {
         public string name;
         public Material mat;
-        public Transform bombPosition;
     }
     public MeshRenderer[] doors;
     public ColorInfo[] infos;
     public Outline[] outlines;
-    public GameObject bomb;
     int randValue;
     void Start()
     {
@@ -24,7 +22,6 @@ public class DoorColorRandom : MonoBehaviour
         {
             doors[i].material = infos[randValue].mat;
         }
-        bomb.transform.position = infos[randValue].bombPosition.position;
     }
 
     public void OnOutline()
