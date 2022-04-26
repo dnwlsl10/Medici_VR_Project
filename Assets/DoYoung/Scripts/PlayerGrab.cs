@@ -43,11 +43,13 @@ public class PlayerGrab : MonoBehaviour
             {
                 lr.SetPosition(1, hitInfo.point);
 
-                if (hitInfo.transform.tag == "door" && isMoused == true)
+                if (hitInfo.transform.tag == "door" && isMoused == true && hitInfo.collider != null )
                 {
                     doorColorRandom = hitInfo.collider.GetComponentInParent<DoorColorRandom>();
+                    outLine = hitInfo.transform.gameObject.GetComponent<Outline>();
+                    if (outLine == null)
+                        outLine = hitInfo.transform.gameObject.AddComponent<Outline>();
 
-                    outLine = hitInfo.transform.gameObject.AddComponent<Outline>().GetComponent<Outline>();
                     outLine.OnRayCastEnter();
 
                 }
@@ -75,7 +77,11 @@ public class PlayerGrab : MonoBehaviour
             isMoused = false;
             if (isMoused == false)
             {
-                GameObject.DestroyImmediate(allDoor.GetComponentInChildren<Outline>());
+                Transform[] allChildren = allDoor.GetComponentsInChildren<Transform>();
+                foreach(Transform child in allChildren)
+                {
+                    Destroy(child.gameObject.GetComponent<Outline>());
+                }
             }
             lr.enabled = false;
             if (hitInfo.transform.tag == "door")
