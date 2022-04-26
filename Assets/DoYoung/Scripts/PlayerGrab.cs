@@ -10,6 +10,15 @@ public class PlayerGrab : MonoBehaviour
     bool isBombHold;
     DoorColorRandom doorColorRandom;
     RaycastHit hitInfo = new RaycastHit();
+    Outline outLine;
+    public bool isMoused;
+    public GameObject allDoor;
+
+
+    private void Start()
+    {
+        isMoused = false;
+    }
 
     void Update()
     {
@@ -24,40 +33,56 @@ public class PlayerGrab : MonoBehaviour
     {
         Ray ray = new Ray(Lhand.position, Lhand.forward);
         lr.SetPosition(0, ray.origin);
-
         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
         {
+            isMoused = true;
             lr.enabled = true;
+
 
             if (Physics.Raycast(Lhand.position, Lhand.forward, out hitInfo))
             {
                 lr.SetPosition(1, hitInfo.point);
 
-                if(hitInfo.transform.tag == "door")
+                if (hitInfo.transform.tag == "door" && isMoused == true)
                 {
-                    doorColorRandom =  hitInfo.collider.GetComponentInParent<DoorColorRandom>();
-                   // doorColorRandom.OnOutline();
+                    doorColorRandom = hitInfo.collider.GetComponentInParent<DoorColorRandom>();
+
+                    outLine = hitInfo.transform.gameObject.AddComponent<Outline>().GetComponent<Outline>();
+                    outLine.OnRayCastEnter();
+
                 }
+
+            }
+            else
+            {
+                lr.SetPosition(1, ray.origin + ray.direction * 10);
+
             }
 
         }
+
+
+
+
+
+
     }
 
     void OnLeftHandButtonUp()
     {
         if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
         {
+            isMoused = false;
+            if (isMoused == false)
+            {
+                GameObject.DestroyImmediate(allDoor.GetComponentInChildren<Outline>());
+            }
             lr.enabled = false;
             if (hitInfo.transform.tag == "door")
             {
 
                 hitInfo.transform.gameObject.GetComponent<Door>().ActionDoor();
-               
-                if(doorColorRandom != null)
-                {
-                    doorColorRandom.OffOutline();
-                }
-       
+
 
             }
             else if (hitInfo.transform.tag == "Bomb")

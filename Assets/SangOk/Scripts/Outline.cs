@@ -133,7 +133,7 @@ public class Outline : MonoBehaviour {
     if (needsUpdate) {
       needsUpdate = false;
 
-            this.GetComponent<Outline>().enabled = false;
+            
             UpdateMaterialProperties();
     }
   }
