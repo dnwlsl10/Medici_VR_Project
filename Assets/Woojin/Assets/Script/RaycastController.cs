@@ -289,7 +289,7 @@ public class RaycastController : MonoBehaviour
         if (hitOut.collider.CompareTag("RightButton"))
         {
             monitor = hitOut.collider.GetComponentInParent<Monitor>();
-            monitor.MoveLight(-1, 0);
+            monitor.MoveLight(0, 1);
         }
         else if (hitOut.collider.CompareTag("UpButton"))
         {

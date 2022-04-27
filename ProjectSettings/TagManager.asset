@@ -27,6 +27,7 @@ TagManager:
   - LeftButton
   - UpButton
   - DownButton
+  - object
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Bomb
   - 
   - 
   - 

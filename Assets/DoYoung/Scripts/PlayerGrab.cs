@@ -137,9 +137,10 @@ public class PlayerGrab : MonoBehaviour
             if (!stactBombMode)
             {
                 grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
+                grapedBomb.transform.rotation = bombPosition.rotation;
             }
-            // grapedBomb.transform.rotation = bombPosition.rotation;
         }
+
         else if (!isBombHold)
         {
             // grapedBomb.transform.GetComponent<Rigidbody>().isKinematic = false;
