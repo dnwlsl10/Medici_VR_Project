@@ -24,6 +24,12 @@ public class PlayerGrab : MonoBehaviour
 
     void Update()
     {
+        if (BombManager.instance.isGameFail)
+        {
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
+
         if (!BombManager.instance.isBombState)
         {
             OnLeftHandButton();
@@ -39,6 +45,11 @@ public class PlayerGrab : MonoBehaviour
         if (isBombHold)
         {
             // RatatebombByHandGrip();
+        }
+
+        if (BombManager.instance.isBombState == false)
+        {
+            this.isBombHold = false;
         }
     }
 

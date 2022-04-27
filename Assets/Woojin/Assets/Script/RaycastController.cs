@@ -12,13 +12,13 @@ public class RaycastController : MonoBehaviour
     private ButtonBox buttonBox;
 
     public OVRInput.Controller hand;
-    private LineRenderer lr;
+    public LineRenderer lr;
     private Ray ray;
 
 
     private void OnEnable()
     {
-        lr = this.GetComponent<LineRenderer>();
+        
     }
     private void Update()
     {

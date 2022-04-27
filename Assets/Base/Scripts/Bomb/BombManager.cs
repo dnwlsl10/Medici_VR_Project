@@ -5,11 +5,14 @@ using UnityEngine;
 public class BombManager : MonoBehaviour
 {
     public GameObject bombMode;
+    public bool isGameFail;
     public bool isBombState;
     public static BombManager instance;
     public static event System.Action OnFailEventLight;
     public bool isFail;
     public bool isSucess;
+
+    public System.Action OnFailed;
 
     [SerializeField] private bool isSucessButtonBox;
     [SerializeField] private bool isSucessImageBox;
@@ -40,14 +43,18 @@ public class BombManager : MonoBehaviour
             bombMode.SetActive(false);
         }
 
+
+
     }
 
     //실패 메서드 
     public void OnFailEvent()
     {
         OnFailEventLight();
-
+        OnFailed();
     }
+
+
 
     public void OnFailImageBox()
     {
