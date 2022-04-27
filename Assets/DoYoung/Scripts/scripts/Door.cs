@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
 
 
     [System.Serializable]
-    public class DoorGet 
+    public class DoorGet
     {
 
         public GameObject Door;
@@ -21,50 +21,68 @@ public class Door : MonoBehaviour
 
 
     }
-   
+
     public List<DoorGet> UseDoors = new List<DoorGet>();
+    AudioSource doorSound;
+    AudioClip doorOpenSound;
+    AudioClip doorCloseSound;
+    AudioClip doorlockedSound;
+    public bool door_in_use;
 
 
-   public bool door_in_use;
-
-
+    private void Start()
+    {
+        doorSound = gameObject.AddComponent<AudioSource>();
+        doorOpenSound = Resources.Load<AudioClip>("Sounds/doorOpen");
+        doorCloseSound = Resources.Load<AudioClip>("Sounds/doorClose");
+        doorlockedSound = Resources.Load<AudioClip>("Sounds/doorLocked");
+    }
 
     public void MoveMyDoor()
     {
 
-        
+
         foreach (var door in UseDoors)
         {
             if (door.Door == gameObject)
             {
-                
-                   
 
-                    if (door.isDoorOpen == false && !door_in_use)
+
+
+                if (door.isDoorOpen == false && !door_in_use)
+                {
+
+
+
+                    if (door.OpenValue != 0)
                     {
-                        
                         door_in_use = true;
-                        
+
                         door.isDoorOpen = true;
-
-                        DoorStartUsing = StartCoroutine(OpenDoor(door.OpenValue, door.Door,door.RotationOrigin));
-
-
-
-
+                        DoorStartUsing = StartCoroutine(OpenDoor(door.OpenValue, door.Door, door.RotationOrigin));
+                        doorSound.PlayOneShot(doorOpenSound);
                     }
-
-                    if (door.isDoorOpen == true && !door_in_use)
+                    else
                     {
-                        
-
-                        door_in_use = true;
-                        
-                        door.isDoorOpen = false;
-                        DoorStartUsing = StartCoroutine(CloseDoor(door.CloseValue, door.Door,door.OpenValue,door.RotationOrigin));
-                        
+                        doorSound.PlayOneShot(doorlockedSound);
                     }
-                
+
+
+
+
+                }
+
+                if (door.isDoorOpen == true && !door_in_use)
+                {
+
+
+                    door_in_use = true;
+
+                    door.isDoorOpen = false;
+                    DoorStartUsing = StartCoroutine(CloseDoor(door.CloseValue, door.Door, door.OpenValue, door.RotationOrigin));
+
+                }
+
 
             }
         }
@@ -73,35 +91,35 @@ public class Door : MonoBehaviour
 
 
 
-        public void ActionDoor()
-        {
+    public void ActionDoor()
+    {
 
 
 
         foreach (var door in UseDoors)
         {
-           
+
             door.Door.GetComponent<Door>().MoveMyDoor();
 
         }
 
 
-        } 
+    }
 
 
-    
+
 
     public Coroutine DoorStartUsing;
-    
 
-    public IEnumerator OpenDoor(int Angle,GameObject currentDoor,GameObject RotationOri)
+
+    public IEnumerator OpenDoor(int Angle, GameObject currentDoor, GameObject RotationOri)
     {
-        
 
-        repeatLoop:
+
+    repeatLoop:
         yield return new WaitForSeconds(0.01f);
-        
-      
+
+
 
         if (Angle > 0)
         {
@@ -112,10 +130,11 @@ public class Door : MonoBehaviour
 
                 door_in_use = false;
                 StopCoroutine(DoorStartUsing);
+
             }
             if (Angle != RotationOri.transform.localEulerAngles.y)
             {
-                goto repeatLoop; 
+                goto repeatLoop;
             }
         }
         if (Angle < 0)
@@ -123,7 +142,7 @@ public class Door : MonoBehaviour
 
             RotationOri.transform.Rotate(new Vector3(0, 0, -95 * Time.deltaTime));
 
-            if ((360+Angle) > RotationOri.transform.localEulerAngles.z)
+            if ((360 + Angle) > RotationOri.transform.localEulerAngles.z)
             {
 
                 door_in_use = false;
@@ -131,37 +150,39 @@ public class Door : MonoBehaviour
             }
             if (Angle != RotationOri.transform.localEulerAngles.y)
             {
-                
+
                 goto repeatLoop;
             }
         }
 
-        
-        
+
+
     }
 
 
 
-    public IEnumerator CloseDoor(int Angle, GameObject currentDoor,int OpenValue, GameObject RotationOri)
+    public IEnumerator CloseDoor(int Angle, GameObject currentDoor, int OpenValue, GameObject RotationOri)
     {
-        repeatLoop:
+    repeatLoop:
         yield return new WaitForSeconds(0.008f);
 
-       
+
 
 
         if (OpenValue == 88)
         {
 
             RotationOri.transform.Rotate(new Vector3(0, 0, -95 * Time.deltaTime));
-           
 
-            if ((Angle+2) > RotationOri.transform.localEulerAngles.z)
+
+            if ((Angle + 10) > RotationOri.transform.localEulerAngles.z)
             {
 
                 door_in_use = false;
                 RotationOri.transform.localEulerAngles = new Vector3(RotationOri.transform.localEulerAngles.x, RotationOri.transform.localEulerAngles.y, Angle);
                 StopCoroutine(DoorStartUsing);
+                doorSound.PlayOneShot(doorCloseSound);
+
             }
             if (Angle != RotationOri.transform.localEulerAngles.z)
             {
@@ -172,23 +193,20 @@ public class Door : MonoBehaviour
         {
 
             RotationOri.transform.Rotate(new Vector3(0, 0, 95 * Time.deltaTime));
-            
-            if (RotationOri.transform.localEulerAngles.z > 358)
+
+            if (RotationOri.transform.localEulerAngles.z > 350)
             {
 
                 door_in_use = false;
                 RotationOri.transform.localEulerAngles = new Vector3(RotationOri.transform.localEulerAngles.x, RotationOri.transform.localEulerAngles.y, Angle);
                 StopCoroutine(DoorStartUsing);
+                doorSound.PlayOneShot(doorCloseSound);
             }
             if (Angle != RotationOri.transform.localEulerAngles.z)
             {
-
                 goto repeatLoop;
             }
         }
-
-
-
 
         if (Angle != RotationOri.transform.localEulerAngles.z)
         {

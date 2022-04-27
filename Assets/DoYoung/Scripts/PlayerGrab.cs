@@ -38,7 +38,7 @@ public class PlayerGrab : MonoBehaviour
 
         if (isBombHold)
         {
-            RatatebombByHandGrip();
+            // RatatebombByHandGrip();
         }
     }
 
@@ -122,6 +122,7 @@ public class PlayerGrab : MonoBehaviour
             }
         }
     }
+    bool stactBombMode;
     void BombHold()
     {
 
@@ -129,7 +130,14 @@ public class PlayerGrab : MonoBehaviour
         {
             grapedBomb.transform.GetComponent<Rigidbody>().isKinematic = true;
             grapedBomb.transform.parent = transform;
-            grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
+            if (Vector3.Distance(grapedBomb.transform.position, bombPosition.position) < 0.05f)
+            {
+                stactBombMode = true;
+            };
+            if (!stactBombMode)
+            {
+                grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
+            }
             // grapedBomb.transform.rotation = bombPosition.rotation;
         }
         else if (!isBombHold)
@@ -152,27 +160,27 @@ public class PlayerGrab : MonoBehaviour
         }
     }
 
-    void RatatebombByHandGrip()
-    {
+    //     void RatatebombByHandGrip()
+    //     {
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
-        {
-            Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch) * bombRoteAcel;
-            // Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
-            // print("rotateDir =" + dir);
-            // grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
-            grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.up, -dir.x);
-            grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.right, dir.y);
-        }
+    //         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
+    //         {
+    //             Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch) * bombRoteAcel;
+    //             // Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
+    //             // print("rotateDir =" + dir);
+    //             // grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
+    //             grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.up, -dir.x);
+    //             grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.right, dir.y);
+    //         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
-        {
-            Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch) * bombRoteAcel;
-            // Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
-            // print("rotateDir =" + dir);
-            // grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
-            grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.up, -dir.x);
-            grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.right, dir.y);
-        }
-    }
+    //         if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+    //         {
+    //             Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch) * bombRoteAcel;
+    //             // Vector3 rotDir = new Vector3(dir.y, -dir.x, 0);
+    //             // print("rotateDir =" + dir);
+    //             // grapedBomb.transform.eulerAngles += rotDir * bombRoteAcel;
+    //             grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.up, -dir.x);
+    //             grapedBomb.transform.RotateAround(grapedBomb.transform.position, transform.right, dir.y);
+    //         }
+    //     }
 }
