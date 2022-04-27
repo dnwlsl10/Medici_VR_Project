@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BombManager : MonoBehaviour
 {
+    public GameObject bombMode;
+    public bool isBombState;
     public static BombManager instance;
     public static event System.Action OnFailEventLight;
     public bool isFail;
@@ -23,9 +25,19 @@ public class BombManager : MonoBehaviour
     }
     void Update()
     {
-        if(isSucessButtonBox && isSucessImageBox && isSucessWireBox)
+        if (isSucessButtonBox && isSucessImageBox && isSucessWireBox)
         {
             OnAllSucess();
+        }
+
+        if (this.isBombState == true)
+        {
+            bombMode.SetActive(true);
+        }
+
+        if (this.isBombState == false)
+        {
+            bombMode.SetActive(false);
         }
 
     }
@@ -34,7 +46,7 @@ public class BombManager : MonoBehaviour
     public void OnFailEvent()
     {
         OnFailEventLight();
-       
+
     }
 
     public void OnFailImageBox()

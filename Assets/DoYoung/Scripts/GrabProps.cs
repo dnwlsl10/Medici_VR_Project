@@ -10,6 +10,7 @@ using UnityEngine;
 //잡고 있는 물체가 있다면 놓고 싶다. 
 public class GrabProps : GrabberBase
 {
+
     public LineRenderer lr;
     public Transform grabPosition;
     GameObject grabObject = null;
@@ -26,59 +27,64 @@ public class GrabProps : GrabberBase
 
     void Update()
     {
-        if (grabObject == null)
+        if (!BombManager.instance.isBombState)
         {
-            ray = new Ray(transform.position, transform.forward);
-
-            bool isHit = Physics.Raycast(ray, out hitInfo);
-            lr.SetPosition(0, ray.origin);
-            if (isHit)
+            if (grabObject == null)
             {
-                lr.SetPosition(1, hitInfo.point);
+                ray = new Ray(transform.position, transform.forward);
+
+                bool isHit = Physics.Raycast(ray, out hitInfo);
+                lr.SetPosition(0, ray.origin);
+                if (isHit)
+                {
+                    lr.SetPosition(1, hitInfo.point);
+                }
+                else
+                {
+                    lr.SetPosition(1, ray.origin + ray.direction * 10);
+                }
+                if (isHit && OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
+                {
+
+                    Grabbable mg = hitInfo.transform.GetComponent<Grabbable>();
+                    if (mg)
+                    {
+                        //만약 이미 잡고 있는 물체라면 그 손에게 놓으라고 해야 함
+
+                        mg.Release();
+                        grabObject = hitInfo.transform.gameObject;
+                        grabObject.transform.parent = grabPosition;
+                        mg.hand = this;
+                        lr.enabled = false;
+                        mg.Catch(this);
+
+                    }
+                }
             }
             else
             {
-                lr.SetPosition(1, ray.origin + ray.direction * 10);
-            }
-            if (isHit && OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
-            {
+                grabObject.transform.localPosition = Vector3.Lerp(grabObject.transform.localPosition, grabPosition.localPosition, Time.deltaTime * 5);
+                grabObject.transform.rotation = Quaternion.Lerp(grabObject.transform.rotation, grabPosition.rotation, Time.deltaTime * 5);
 
-                Grabbable mg = hitInfo.transform.GetComponent<Grabbable>();
-                if (mg)
+                if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
-                    //만약 이미 잡고 있는 물체라면 그 손에게 놓으라고 해야 함
+                    grabObject.transform.parent = null;
+                    Rigidbody rb = grabObject.GetComponent<Rigidbody>();
 
-                    mg.Release();
-                    grabObject = hitInfo.transform.gameObject;
-                    grabObject.transform.parent = grabPosition;
-                    mg.hand = this;
-                    lr.enabled = false;
-                    mg.Catch(this);
+                    rb.velocity = transform.TransformDirection(OVRInput.GetLocalControllerVelocity(hand) * kAdjustForce);
+                    rb.angularVelocity = OVRInput.GetLocalControllerAngularVelocity(hand);
 
+                    Grabbable mg = grabObject.GetComponent<Grabbable>();
+                    if (mg)
+                    {
+                        mg.Release();
+                        mg.Catch(null);
+                    }
                 }
             }
         }
-        else
-        {
-            grabObject.transform.localPosition = Vector3.Lerp(grabObject.transform.localPosition, grabPosition.localPosition, Time.deltaTime * 5);
-            grabObject.transform.rotation = Quaternion.Lerp(grabObject.transform.rotation, grabPosition.rotation, Time.deltaTime * 5);
 
-            if (OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger, hand))
-            {
-                grabObject.transform.parent = null;
-                Rigidbody rb = grabObject.GetComponent<Rigidbody>();
 
-                rb.velocity = transform.TransformDirection(OVRInput.GetLocalControllerVelocity(hand) * kAdjustForce);
-                rb.angularVelocity = OVRInput.GetLocalControllerAngularVelocity(hand);
-
-                Grabbable mg = grabObject.GetComponent<Grabbable>();
-                if (mg)
-                {
-                    mg.Release();
-                    mg.Catch(null);
-                }
-            }
-        }
     }
 
     override public void PutDown()

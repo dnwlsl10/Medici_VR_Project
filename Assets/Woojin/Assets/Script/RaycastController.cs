@@ -16,14 +16,18 @@ public class RaycastController : MonoBehaviour
     private Ray ray;
 
 
-    private void Start()
+    private void OnEnable()
     {
         lr = this.GetComponent<LineRenderer>();
     }
     private void Update()
     {
         //this.OnRayCastButtonDown();
-        this.OcculusRayCast();
+        if (BombManager.instance.isBombState)
+        {
+            this.OcculusRayCast();
+        }
+
     }
 
     void OcculusRayCast()
@@ -31,7 +35,7 @@ public class RaycastController : MonoBehaviour
         ray = new Ray(transform.position, transform.forward);
 
         bool isHit = Physics.Raycast(ray, out hitOut);
-      
+
         lr.SetPosition(0, ray.origin);
         if (isHit)
         {
@@ -56,7 +60,7 @@ public class RaycastController : MonoBehaviour
         }
 
 
-       
+
 
     }
 
@@ -89,8 +93,8 @@ public class RaycastController : MonoBehaviour
         }
         else
         {
-            if(redWire != null)
-            redWire.OffOutline();
+            if (redWire != null)
+                redWire.OffOutline();
         }
 
         if (hitOut.collider.CompareTag("GreenWire"))
@@ -100,8 +104,8 @@ public class RaycastController : MonoBehaviour
         }
         else
         {
-            if(greenWire != null)
-            greenWire.OffOutline();
+            if (greenWire != null)
+                greenWire.OffOutline();
         }
 
         if (hitOut.collider.CompareTag("BlueWire"))
@@ -111,8 +115,8 @@ public class RaycastController : MonoBehaviour
         }
         else
         {
-            if(blueWire != null)
-            blueWire.OffOutline();
+            if (blueWire != null)
+                blueWire.OffOutline();
 
         }
 
@@ -123,8 +127,8 @@ public class RaycastController : MonoBehaviour
         }
         else
         {
-            if(yellowWire != null)
-            yellowWire.OffOutline();
+            if (yellowWire != null)
+                yellowWire.OffOutline();
         }
 
     }
@@ -158,7 +162,7 @@ public class RaycastController : MonoBehaviour
     bool isBreakWindow;
     void OnActionWindow()
     {
-      
+
         if (hitOut.collider.CompareTag("Window"))
         {
             BreakableWindow window = hitOut.collider.gameObject.GetComponent<BreakableWindow>();
@@ -176,13 +180,13 @@ public class RaycastController : MonoBehaviour
             buttonBox.outline.OnRayCastEnter();
             if (buttonBox.state == ButtonBox.State.Normal)
             {
-                if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
                     buttonBox.PushButton();
                     buttonBox.NormalStateTryDefuse();
                     return;
                 }
-               
+
             }
 
 
@@ -195,7 +199,7 @@ public class RaycastController : MonoBehaviour
                     Debug.Log("UpUPUPUPUPUPUPUPUPUP");
                     buttonBox.PullButton();
                     buttonBox.WarnningStateKeyUp();
-                  
+
                     return;
                 }
 
@@ -323,7 +327,7 @@ public class RaycastController : MonoBehaviour
 
         if (hitOut.collider.CompareTag("UpButton"))
         {
-             btnUp = hitOut.collider.GetComponent<Outline>();
+            btnUp = hitOut.collider.GetComponent<Outline>();
             btnUp.OnRayCastEnter();
         }
         else
@@ -334,7 +338,7 @@ public class RaycastController : MonoBehaviour
 
         if (hitOut.collider.CompareTag("DownButton"))
         {
-             btnDown = hitOut.collider.GetComponent<Outline>();
+            btnDown = hitOut.collider.GetComponent<Outline>();
             btnDown.OnRayCastEnter();
         }
         else
@@ -345,7 +349,7 @@ public class RaycastController : MonoBehaviour
 
         if (hitOut.collider.CompareTag("LeftButton"))
         {
-             btnLeft = hitOut.collider.GetComponent<Outline>();
+            btnLeft = hitOut.collider.GetComponent<Outline>();
             btnLeft.OnRayCastEnter();
         }
         else

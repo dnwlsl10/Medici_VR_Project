@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGrab : MonoBehaviour
 {
     public Transform Lhand;
+    public Transform Rhand;
     public LineRenderer lr;
     public Transform bombPosition;
     bool isBombHold;
@@ -23,9 +24,15 @@ public class PlayerGrab : MonoBehaviour
 
     void Update()
     {
-        OnLeftHandButton();
+        if (!BombManager.instance.isBombState)
+        {
+            OnLeftHandButton();
 
-        OnLeftHandButtonUp();
+            OnLeftHandButtonUp();
+        }
+
+        // BombHold();
+        OnRightIndexButtonDown();
 
         BombHold();
 
@@ -95,27 +102,40 @@ public class PlayerGrab : MonoBehaviour
                 hitInfo.transform.gameObject.GetComponent<Door>().ActionDoor();
 
             }
-            else if (hitInfo.transform.tag == "Bomb")
+
+        }
+    }
+
+    void OnRightIndexButtonDown()
+    {
+        Ray ray = new Ray(Rhand.position, Rhand.forward);
+        RaycastHit hitInfo;
+        Physics.Raycast(ray, out hitInfo);
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            if (hitInfo.transform.tag == "Bomb")
             {
-                isBombHold = !isBombHold;
+                isBombHold = true;
+                BombManager.instance.isBombState = isBombHold;
+                grapedBomb = hitInfo.transform.gameObject;
             }
         }
     }
     void BombHold()
     {
-        if (hitInfo.transform == null) return;
 
-        if (isBombHold && (hitInfo.collider.tag == "Bomb"))
+        if (isBombHold)
         {
-            hitInfo.transform.GetComponent<Rigidbody>().isKinematic = true;
-            hitInfo.transform.parent = transform;
-            hitInfo.transform.position = Vector3.Lerp(hitInfo.transform.position, bombPosition.position, Time.deltaTime * 2);
-            hitInfo.transform.rotation = bombPosition.rotation;
+            grapedBomb.transform.GetComponent<Rigidbody>().isKinematic = true;
+            grapedBomb.transform.parent = transform;
+            grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
+            // grapedBomb.transform.rotation = bombPosition.rotation;
         }
-        else if (!isBombHold && (hitInfo.collider.tag == "Bomb"))
+        else if (!isBombHold)
         {
-            hitInfo.transform.GetComponent<Rigidbody>().isKinematic = false;
-            hitInfo.transform.parent = null;
+            // grapedBomb.transform.GetComponent<Rigidbody>().isKinematic = false;
+            // grapedBomb.transform.parent = null;
         }
         else
         {

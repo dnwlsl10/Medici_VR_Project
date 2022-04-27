@@ -20,31 +20,35 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        if (!cc.isGrounded)
+        if (!BombManager.instance.isBombState)
         {
-            yVelocity += gravity * Time.deltaTime;
+            if (!cc.isGrounded)
+            {
+                yVelocity += gravity * Time.deltaTime;
+            }
+
+            // if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))
+            {
+                Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
+                Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
+                dirMove.Normalize();
+                dirMove = Camera.main.transform.TransformDirection(dirMove);
+                Vector3 velocity = dirMove * speed;
+                velocity.y = yVelocity;
+                cc.Move(velocity * Time.deltaTime);
+            }
+
+            {
+                Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
+                dirStick.y = 0;
+                Vector3 camRotateDir = new Vector3(0, dirStick.x, 0);
+                print(dirStick);
+                transform.Rotate(camRotateDir);
+
+
+            }
         }
 
-        // if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))
-        {
-            Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
-            Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
-            dirMove.Normalize();
-            dirMove = Camera.main.transform.TransformDirection(dirMove);
-            Vector3 velocity = dirMove * speed;
-            velocity.y = yVelocity;
-            cc.Move(velocity * Time.deltaTime);
-        }
-
-        {
-            Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
-            dirStick.y = 0;
-            Vector3 camRotateDir = new Vector3(0, dirStick.x, 0);
-            print(dirStick);
-            transform.Rotate(camRotateDir);
-
-
-        }
         // float h = Input.GetAxisRaw("Horizontal");
         // float v = Input.GetAxisRaw("Vertical");
         // float mx = Input.GetAxis("Mouse X");
