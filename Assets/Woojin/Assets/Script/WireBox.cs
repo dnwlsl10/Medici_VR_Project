@@ -95,6 +95,7 @@ public class WireBox : MonoBehaviour , BombInterface
         if (!isFail)
         {
             isFail = true;
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
             wireBoxLight.OnFail(() =>
             {
                 BombManager.instance.OnFailWireBox();
@@ -109,6 +110,7 @@ public class WireBox : MonoBehaviour , BombInterface
     public bool Success()
     {
         wireBoxLight.OnSucess();
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "SuccessedSound");
         BombManager.instance.OnSucessWireBox();
         return true;
     }

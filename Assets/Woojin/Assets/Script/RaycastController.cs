@@ -137,23 +137,27 @@ public class RaycastController : MonoBehaviour
     {
         if (hitOut.collider.CompareTag("RedWire"))
         {
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "CutSound");
             redWire = hitOut.collider.GetComponentInParent<RedWire>();
             redWire.Init();
         }
         else if (hitOut.collider.CompareTag("GreenWire"))
         {
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "CutSound");
             greenWire = hitOut.collider.GetComponentInParent<GreenWire>();
             greenWire.Init();
 
         }
         else if (hitOut.collider.CompareTag("BlueWire"))
         {
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "CutSound");
             blueWire = hitOut.collider.GetComponentInParent<BlueWire>();
             blueWire.Init();
 
         }
         else if (hitOut.collider.CompareTag("YellowWire"))
         {
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "CutSound");
             yellowWire = hitOut.collider.GetComponentInParent<YellowWire>();
             yellowWire.Init();
         }
