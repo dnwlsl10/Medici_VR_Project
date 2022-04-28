@@ -1174,6 +1174,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1614332448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4927737680417905353, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+  m_PrefabInstance: {fileID: 4927737680414511653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1614609999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1209,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1737100456 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4927737680417905357, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+  m_PrefabInstance: {fileID: 4927737680414511653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1752694527
 Mesh:
   m_ObjectHideFlags: 0
@@ -1636,7 +1646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 971046595230511224, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Range
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 971046595230511224, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Enabled
@@ -1736,7 +1746,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Range
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
+      propertyPath: m_Color.b
+      value: 0.7971698
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
+      propertyPath: m_Color.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
+      propertyPath: m_Color.r
+      value: 0.88896793
       objectReference: {fileID: 0}
     - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Enabled
@@ -2136,7 +2158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404478890782094762, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Range
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7404478890782094762, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Enabled
@@ -2296,7 +2318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404478892546109323, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Range
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7404478892546109323, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Enabled
@@ -3828,11 +3850,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4910571385261075139, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4910571387518907737, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4927737678934105928, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: m_Name
@@ -3890,9 +3912,25 @@ PrefabInstance:
       propertyPath: inGame
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4927737680386787065, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 1737100456}
     - target: {fileID: 4927737680416265495, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_ShowToolkit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 1614332448}
+    - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
