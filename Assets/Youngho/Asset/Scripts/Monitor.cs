@@ -71,6 +71,8 @@ public class Monitor : MonoBehaviour , BombInterface
         {
             return;
         }
+
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "ButtonInputSound");
         print("before ::>>  row : " + this.row + "// addedRow :" + row + " // col :" + this.col + "//addedCol :" + col);
 
         if (this.row + row > 8 || this.row + row < 0 || this.col + col > 8 || this.col + col < 0)
@@ -108,6 +110,7 @@ public class Monitor : MonoBehaviour , BombInterface
     {
         print("fail");
         isFail = true;
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
         arrowLight.OnFail(() =>
         {
             BombManager.instance.OnFailWireBox();
@@ -118,6 +121,7 @@ public class Monitor : MonoBehaviour , BombInterface
     public bool Success()
     {
         isSucces = true;
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "SuccessedSound");
         arrowLight.OnSucess();
         BombManager.instance.OnSucessWireBox();
         print("Success");

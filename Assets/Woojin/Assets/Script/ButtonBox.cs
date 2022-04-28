@@ -275,9 +275,10 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public bool Fail()
     {
-        print("실패시 나올 자립니다.");
+        
         buttonBoxLight.OnFail(() =>
         {
+            SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
             BombManager.instance.OnFailButtonBox();
         });
         return false;
@@ -285,6 +286,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public bool Success()
     {
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "SuccessedSound");
         buttonBoxLight.OnSucess();
         BombManager.instance.OnSucessButtonBox();
         print("성공시 나올 자립니다.");
