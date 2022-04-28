@@ -67,6 +67,7 @@ public class Lights : MonoBehaviour
 
     public void Start()
     {
+        light.SetActive(false);
         battery.SetColor("_EmissionColor", Color.black);
         lastBattery.SetColor("_EmissionColor", Color.black);
         lightSphere.SetActive(true);
@@ -78,6 +79,7 @@ public class Lights : MonoBehaviour
     }
     public void OnSucess()
     {
+        light.SetActive(true);
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = greenLightSphereMat;
         light.GetComponent<Light>().color = greenLightColor;
@@ -87,6 +89,7 @@ public class Lights : MonoBehaviour
 
     public void OnFail(System.Action OnRedLight)
     {
+        light.SetActive(true);
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = redLightSphereMat;
         light.GetComponent<Light>().color = redLightColor;
@@ -114,6 +117,7 @@ public class Lights : MonoBehaviour
 
     public void OnDefultLight()
     {
+        light.SetActive(true);
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = defaultLightSphereMat;
         light.GetComponent<Light>().color = defaultColor;
@@ -121,6 +125,7 @@ public class Lights : MonoBehaviour
 
     public void OnRedLight()
     {
+        light.SetActive(true);
         lightSphere.SetActive(true);
         lightSphere.GetComponent<MeshRenderer>().material = redLightSphereMat;
         light.GetComponent<Light>().color = redLightColor;
