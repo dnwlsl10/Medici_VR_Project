@@ -51,19 +51,20 @@ public class ButtonInput : MonoBehaviour
 
             if (objName[0] == null)
             {
-                objName[0] = raycastHit.transform.name;
+                objName[0] = raycastHit.collider.gameObject.name;
+              Debug.Log(objName[0]);
             }
             else if (objName[0] != null && objName[1] == null)
             {
-                objName[1] = raycastHit.transform.name;
+                objName[1] = raycastHit.collider.gameObject.name;
             }
             else if (objName[1] != null && objName[2] == null)
             {
-                objName[2] = raycastHit.transform.name;
+                objName[2] = raycastHit.collider.gameObject.name;
             }
             else if (objName[2] != null && objName[3] == null)
             {
-                objName[3] = raycastHit.transform.name;
+                objName[3] = raycastHit.collider.gameObject.name;
             }
 
             for (int i = 0; i<objName.Length; i++)

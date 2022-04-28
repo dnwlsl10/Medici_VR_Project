@@ -8,11 +8,13 @@ public enum eSceneType
 }
 public class App : MonoBehaviour
 {
+    public static App instance;
     private eSceneType sceneType;
 
     private void Awake()
     {
         Screen.SetResolution(960, 540, false);
+        instance = this;
     }
 
     private void Start()
@@ -24,7 +26,7 @@ public class App : MonoBehaviour
         this.ChangeScene(eSceneType.Title);
     }
 
-    public void ChangeScene(eSceneType sceneType)
+    public void ChangeScene(eSceneType sceneType, AsyncOperation async =null)
     {
 
         switch (sceneType)
@@ -58,9 +60,10 @@ public class App : MonoBehaviour
 
                         var lobby = GameObject.FindObjectOfType<Lobby>();
 
-                        lobby.OnGameStart = () =>
+                        lobby.OnGameStart = (ao) =>
                          {
-                             this.ChangeScene(eSceneType.InGame);
+                             
+                             this.ChangeScene(eSceneType.InGame, ao);
                          };
 
                     };
@@ -69,8 +72,6 @@ public class App : MonoBehaviour
 
             case eSceneType.InGame:
                 {
-                    Debug.Log("InGame");
-                    var Ingame = GameObject.FindObjectOfType<InGame>();
 
                 }
                 break;

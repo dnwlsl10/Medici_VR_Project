@@ -31,15 +31,17 @@ public class PlayerGrab : MonoBehaviour
             timeyouwant += Time.deltaTime;
 
             int time = 10;
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-
-            if (timeyouwant > time)
+            if (this.GetComponent<Rigidbody>())
             {
-                this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
-                this.photo.gameObject.SetActive(true);
+                if (timeyouwant > time)
+                {
+                    this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+                    this.photo.gameObject.SetActive(true);
+                }
             }
-
         }
 
 

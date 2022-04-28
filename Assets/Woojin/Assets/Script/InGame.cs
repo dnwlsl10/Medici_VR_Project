@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class InGame : MonoBehaviour
 {
-    void Init()
+    public System.Action OnCompelet;
+    public bool isChangeScence;
+    public void Update()
     {
-        
-        
+        if (BombManager.instance.isChangeScence)
+        {
+            OnCompelet();
+        }
     }
+
+
 }

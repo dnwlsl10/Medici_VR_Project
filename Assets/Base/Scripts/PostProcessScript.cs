@@ -6,6 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class PostProcessScript : MonoBehaviour
 {
     public static PostProcessScript instance;
+    public InGame inGame;
     private void Awake()
     {
         PostProcessScript.instance = this;
@@ -14,7 +15,7 @@ public class PostProcessScript : MonoBehaviour
     PostProcessVolume ppv;
     private Vignette vignette;
     private AutoExposure autoExposure;
-
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -31,14 +32,21 @@ public class PostProcessScript : MonoBehaviour
         {
             StartCoroutine(VigenetteOut());
         }
+
+        if (BombManager.instance.isGameSuccess)
+        {
+            StartCoroutine(VigenetteOut());
+        }
     }
     IEnumerator fadeOut()
     {
         while (autoExposure.minLuminance.value < 9)
         {
-            autoExposure.minLuminance.value += 0.1f;
+            autoExposure.minLuminance.value += 0.2f;
             yield return 0;
         }
+
+        App.instance.ChangeScene(eSceneType.Title);
     }
 
     IEnumerator VigenetteOut()

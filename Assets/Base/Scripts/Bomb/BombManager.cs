@@ -6,11 +6,13 @@ public class BombManager : MonoBehaviour
 {
     public GameObject bombMode;
     public bool isGameFail;
+    public bool isGameSuccess;
     public bool isBombState;
     public static BombManager instance;
     public static event System.Action OnFailEventLight;
     public bool isFail;
     public bool isSucess;
+    public bool isChangeScence;
 
     public System.Action OnFailed;
 
@@ -42,6 +44,7 @@ public class BombManager : MonoBehaviour
         {
             bombMode.SetActive(false);
         }
+
 
 
 
@@ -85,7 +88,14 @@ public class BombManager : MonoBehaviour
     //성공 메서드 
     public void OnSucessEvent()
     {
+        this.isBombState = false;
+        StartCoroutine(OnSucessEvnetSound());
+    }
 
+    IEnumerator OnSucessEvnetSound()
+    {
+        yield return new WaitForSeconds(3f);
+        isGameSuccess = true;
     }
     public void OnSucessImageBox()
     {
@@ -109,5 +119,6 @@ public class BombManager : MonoBehaviour
     {
         Debug.Log("폭탄해체 완료");
         isSucess = true;
+        OnSucessEvent();
     }
 }

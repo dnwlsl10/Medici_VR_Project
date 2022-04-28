@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Lobby : MonoBehaviour
 {
     public RightHand rh;
-    public System.Action OnGameStart;
+    public System.Action<AsyncOperation> OnGameStart;
     private float count;
     public LoadingController lc;
 
@@ -43,7 +43,7 @@ public class Lobby : MonoBehaviour
                     yield return new WaitForSeconds(5f);
                     Debug.Log(ao.isDone);
                     ao.allowSceneActivation = true;
-                    OnGameStart();
+                    OnGameStart(ao);
                     yield break;
                 }
             }
