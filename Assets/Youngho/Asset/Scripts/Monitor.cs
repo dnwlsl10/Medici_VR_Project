@@ -123,7 +123,7 @@ public class Monitor : MonoBehaviour , BombInterface
         isSucces = true;
         SoundManager.instance.PlaySound(Camera.main.transform.position, "SuccessedSound");
         arrowLight.OnSucess();
-        BombManager.instance.OnSucessWireBox();
+        BombManager.instance.OnSuccessArrowBox();
         print("Success");
         return true;
     }

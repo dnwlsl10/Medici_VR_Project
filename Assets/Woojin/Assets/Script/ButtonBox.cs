@@ -252,8 +252,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public void PullButton()
     {
-        defaultPosition = button.gameObject.transform.position;
-        pushedPosition = defaultPosition + button.gameObject.transform.up * pushedZDistance;
+        pushedPosition = button.transform.position;
         Debug.Log("UpUPUPUPUPUPUPUPUPUP");
         isButtonPush = false;
         StopCoroutine(IEPushButton());
@@ -278,10 +277,10 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public bool Fail()
     {
-        
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
+
         buttonBoxLight.OnFail(() =>
         {
-            SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
             BombManager.instance.OnFailButtonBox();
         });
         return false;

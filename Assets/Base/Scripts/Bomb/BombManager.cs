@@ -19,6 +19,7 @@ public class BombManager : MonoBehaviour
     [SerializeField] private bool isSucessButtonBox;
     [SerializeField] private bool isSucessImageBox;
     [SerializeField] private bool isSucessWireBox;
+    [SerializeField] private bool isSucessArrowBox;
 
     private void Awake()
     {
@@ -30,7 +31,7 @@ public class BombManager : MonoBehaviour
     }
     void Update()
     {
-        if (isSucessButtonBox && isSucessImageBox && isSucessWireBox)
+        if (isSucessButtonBox && isSucessImageBox && isSucessWireBox && isSucessArrowBox)
         {
             OnAllSucess();
         }
@@ -115,6 +116,11 @@ public class BombManager : MonoBehaviour
         Debug.Log("버튼 폭탄 미션 완료");
     }
 
+    public void OnSuccessArrowBox()
+    {
+        isSucessArrowBox = true;
+        Debug.Log("화살표 폭탄 미션 완료");
+    }
     public void OnAllSucess()
     {
         Debug.Log("폭탄해체 완료");
