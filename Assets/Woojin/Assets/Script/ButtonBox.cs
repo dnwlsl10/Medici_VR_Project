@@ -161,9 +161,10 @@ public class ButtonBox : MonoBehaviour, BombInterface
     {
         bool isSuccess = false;
         //Timer 들어갈 곳.
-        string temp = ((int)(kdy_Timer.instance.TIME)).ToString();
+        string temp = ((int)(kdy_Timer.instance.TIME % 60)).ToString();
+        Debug.Log(temp);
         isSuccess = FirstTimeCheck(temp);
-
+        Debug.Log(isSuccess);
         CheckNormalSuccessAndChangeState(isSuccess);
 
         return isSuccess;
@@ -251,6 +252,8 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public void PullButton()
     {
+        defaultPosition = button.gameObject.transform.position;
+        pushedPosition = defaultPosition + button.gameObject.transform.up * pushedZDistance;
         Debug.Log("UpUPUPUPUPUPUPUPUPUP");
         isButtonPush = false;
         StopCoroutine(IEPushButton());

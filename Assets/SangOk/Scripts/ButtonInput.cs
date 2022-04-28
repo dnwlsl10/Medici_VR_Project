@@ -105,7 +105,7 @@ public class ButtonInput : MonoBehaviour
             case State.Success:
                 successedSound.GetComponent<AudioSource>().Play();
                 buttonBoxLight.OnSucess();
-                BombManager.instance.OnSucessButtonBox();
+                BombManager.instance.OnSucessImageBox();
                 break;
             case State.Fail:
 
@@ -117,7 +117,7 @@ public class ButtonInput : MonoBehaviour
 
                 buttonBoxLight.OnFail(() =>
                 {
-                    BombManager.instance.OnFailButtonBox();
+                    BombManager.instance.OnFailImageBox();
                 });
 
                 break;

@@ -17,13 +17,16 @@ public class PlayerGrab : MonoBehaviour
     GameObject grapedBomb;
     public float bombRoteAcel = 5;
     public GameObject photo;
-
+  
     private void Start()
     {
         isMoused = false;
     }
 
     float timeyouwant = 0;
+
+    
+
     void Update()
     {
         if (BombManager.instance.isGameFail)

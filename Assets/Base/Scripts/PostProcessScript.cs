@@ -6,7 +6,6 @@ using UnityEngine.Rendering.PostProcessing;
 public class PostProcessScript : MonoBehaviour
 {
     public static PostProcessScript instance;
-    public InGame inGame;
     private void Awake()
     {
         PostProcessScript.instance = this;

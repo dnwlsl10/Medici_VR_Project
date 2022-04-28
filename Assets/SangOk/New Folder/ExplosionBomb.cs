@@ -12,6 +12,7 @@ public class ExplosionBomb : MonoBehaviour
     public float explodeRadius = 3;
     public GameObject explosion;
     public GameObject flame;
+    public OVRInput.Controller hand;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class ExplosionBomb : MonoBehaviour
     // Update is called once per frame
 
 
-
+    public Transform target;
 
 
 
@@ -29,6 +30,12 @@ public class ExplosionBomb : MonoBehaviour
 
     void Update()
     {
+
+        if (BombManager.instance.isGameSuccess)
+        {
+            this.gameObject.transform.parent = target.transform;
+            this.gameObject.transform.localPosition = target.position;
+        }
 
         BombManager.instance.OnFailed = () =>
         {
@@ -51,14 +58,27 @@ public class ExplosionBomb : MonoBehaviour
                 }
             }
 
-            this.transform.parent = null;
-            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100, ForceMode.Impulse);
+            this.gameObject.transform.parent = null;
+            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100f, ForceMode.Impulse);
+            this.gameObject.GetComponent<Rigidbody>().AddTorque(Vector3.forward * 100f, ForceMode.Impulse);
             PostProcessScript.instance.isPlayerDead = true;
             //게임 실패
             BombManager.instance.isGameFail = true;
+            StartCoroutine(VibrateController(1f, 1f, 1f, hand));
 
         };
     }
+
+
+    protected IEnumerator VibrateController(float waitTime, float frequenct, float amplitude, OVRInput.Controller controller)
+    {
+        OVRInput.SetControllerVibration(frequenct, amplitude, controller);
+        yield return new WaitForSeconds(waitTime);
+        OVRInput.SetControllerVibration(0, 0, controller);
+
+    }
+
+
 
 
     IEnumerator Explosion()
