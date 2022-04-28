@@ -26,32 +26,36 @@ public class PlayerMove : MonoBehaviour
 #if UNITY_EDITOR
         if (!BombManager.instance.isBombState)
         {
-            if (!cc.isGrounded)
+            if (!BombManager.instance.isGameFail)
             {
-                yVelocity += gravity * Time.deltaTime;
-            }
-
-            {
-                Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
-                Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
-                dirMove.Normalize();
-                dirMove = Camera.main.transform.TransformDirection(dirMove);
-                Vector3 velocity = dirMove * speed;
-                velocity.y = yVelocity;
-                cc.Move(velocity * Time.deltaTime);
-
-                if (dirMove != Vector3.zero)
+                if (!cc.isGrounded)
                 {
-                    if (!walkSource.isPlaying)
+                    yVelocity += gravity * Time.deltaTime;
+                }
+
+                {
+                    Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
+                    Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
+                    dirMove.Normalize();
+                    dirMove = Camera.main.transform.TransformDirection(dirMove);
+                    Vector3 velocity = dirMove * speed;
+                    velocity.y = yVelocity;
+                    cc.Move(velocity * Time.deltaTime);
+
+                    if (dirMove != Vector3.zero)
                     {
-                        walkSource.Play();
+                        if (!walkSource.isPlaying)
+                        {
+                            walkSource.Play();
+                        }
+                    }
+                    else
+                    {
+                        walkSource.Stop();
                     }
                 }
-                else
-                {
-                    walkSource.Stop();
-                }
             }
+           
 
             {
                 Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);

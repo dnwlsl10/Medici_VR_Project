@@ -16,6 +16,7 @@ public class PlayerGrab : MonoBehaviour
     public List<GameObject> highlightedDoors;
     GameObject grapedBomb;
     public float bombRoteAcel = 5;
+    public GameObject photo;
 
     private void Start()
     {
@@ -26,7 +27,17 @@ public class PlayerGrab : MonoBehaviour
     {
         if (BombManager.instance.isGameFail)
         {
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            int time = 10;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+            if(time < Time.time)
+            {
+                this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+               
+                this.photo.gameObject.SetActive(true);
+            }
+
+
         }
 
 
@@ -119,19 +130,23 @@ public class PlayerGrab : MonoBehaviour
 
     void OnRightIndexButtonDown()
     {
-        Ray ray = new Ray(Rhand.position, Rhand.forward);
-        RaycastHit hitInfo;
-        Physics.Raycast(ray, out hitInfo);
-
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        if (!BombManager.instance.isGameFail)
         {
-            if (hitInfo.transform.tag == "Bomb")
+            Ray ray = new Ray(Rhand.position, Rhand.forward);
+            RaycastHit hitInfo;
+            Physics.Raycast(ray, out hitInfo);
+
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-                isBombHold = true;
-                BombManager.instance.isBombState = isBombHold;
-                grapedBomb = hitInfo.transform.gameObject;
+                if (hitInfo.transform.tag == "Bomb")
+                {
+                    isBombHold = true;
+                    BombManager.instance.isBombState = isBombHold;
+                    grapedBomb = hitInfo.transform.gameObject;
+                }
             }
         }
+       
     }
     bool stactBombMode;
     void BombHold()

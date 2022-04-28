@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Woojin/Scenes/App.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Woojin/Scenes/Title.unity
+    guid: d739fc0d766b0aa4ca415f66b7984c7e
+  - enabled: 1
+    path: Assets/Woojin/Scenes/Lobby.unity
+    guid: c8c744d7bc3bae745a4d16c7766d0401
+  - enabled: 1
+    path: Assets/Base/Scenes/InGame.unity
+    guid: 900cabfe119a7174fa55ce16683ecb03
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 1fbfaf213dc0792449c37b7f9ca18072, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b3a969762b2bd9f49a19410c109ac904, type: 2}

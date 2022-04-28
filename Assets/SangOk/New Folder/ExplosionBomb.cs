@@ -49,8 +49,11 @@ public class ExplosionBomb : MonoBehaviour
                     obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
             }
-            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            this.gameObject.transform.parent = null;
+            
+            this.transform.parent = null;
+            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100, ForceMode.Impulse);
+
+            //게임 실패
             BombManager.instance.isGameFail = true;
 
         };
