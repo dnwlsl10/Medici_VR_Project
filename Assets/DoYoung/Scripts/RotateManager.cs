@@ -25,7 +25,7 @@ public class RotateManager : MonoBehaviour
     {
         if (BombManager.instance.isBombState)
         {
-            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) && !OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
             {
                 Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch) * bombRoteAcel;
 
@@ -33,13 +33,23 @@ public class RotateManager : MonoBehaviour
                 rotateCube.transform.RotateAround(rotateCube.transform.position, Camera.main.transform.right, dir.y);
             }
 
-            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch) && !OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
             {
                 Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch) * bombRoteAcel;
 
                 rotateCube.transform.RotateAround(rotateCube.transform.position, Camera.main.transform.up, -dir.x);
                 rotateCube.transform.RotateAround(rotateCube.transform.position, Camera.main.transform.right, dir.y);
             }
+
+            if(OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+            {
+
+                Vector3 dir = (OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LHand) + OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RHand) ) / 2;
+
+                rotateCube.transform.localPosition += dir * Time.deltaTime;
+            }
+
+
         }
     }
 }
