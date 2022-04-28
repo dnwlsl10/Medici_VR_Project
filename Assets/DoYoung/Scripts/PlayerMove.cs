@@ -55,7 +55,7 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
             }
-           
+
 
             {
                 Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);

@@ -23,20 +23,22 @@ public class PlayerGrab : MonoBehaviour
         isMoused = false;
     }
 
+    float timeyouwant = 0;
     void Update()
     {
         if (BombManager.instance.isGameFail)
         {
+            timeyouwant += Time.deltaTime;
+
             int time = 10;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
-            if(time < Time.time)
+            if (timeyouwant > time)
             {
                 this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-               
+
                 this.photo.gameObject.SetActive(true);
             }
-
 
         }
 
@@ -46,10 +48,9 @@ public class PlayerGrab : MonoBehaviour
             OnLeftHandButton();
 
             OnLeftHandButtonUp();
-        }
 
-        // BombHold();
-        OnRightIndexButtonDown();
+            OnRightIndexButtonDown();
+        }
 
         BombHold();
 
@@ -100,12 +101,6 @@ public class PlayerGrab : MonoBehaviour
             }
 
         }
-
-
-
-
-
-
     }
 
     void OnLeftHandButtonUp()
@@ -130,23 +125,21 @@ public class PlayerGrab : MonoBehaviour
 
     void OnRightIndexButtonDown()
     {
-        if (!BombManager.instance.isGameFail)
-        {
-            Ray ray = new Ray(Rhand.position, Rhand.forward);
-            RaycastHit hitInfo;
-            Physics.Raycast(ray, out hitInfo);
 
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        Ray ray = new Ray(Rhand.position, Rhand.forward);
+        RaycastHit hitInfo;
+        Physics.Raycast(ray, out hitInfo);
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+        {
+            if (hitInfo.transform.tag == "Bomb")
             {
-                if (hitInfo.transform.tag == "Bomb")
-                {
-                    isBombHold = true;
-                    BombManager.instance.isBombState = isBombHold;
-                    grapedBomb = hitInfo.transform.gameObject;
-                }
+                isBombHold = true;
+                BombManager.instance.isBombState = isBombHold;
+                grapedBomb = hitInfo.transform.gameObject;
             }
         }
-       
+
     }
     bool stactBombMode;
     void BombHold()
@@ -165,16 +158,6 @@ public class PlayerGrab : MonoBehaviour
                 grapedBomb.transform.position = Vector3.Lerp(grapedBomb.transform.position, bombPosition.position, Time.deltaTime * 2);
                 grapedBomb.transform.rotation = bombPosition.rotation;
             }
-        }
-
-        else if (!isBombHold)
-        {
-            // grapedBomb.transform.GetComponent<Rigidbody>().isKinematic = false;
-            // grapedBomb.transform.parent = null;
-        }
-        else
-        {
-            return;
         }
     }
 

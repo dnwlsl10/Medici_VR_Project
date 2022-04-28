@@ -38,21 +38,22 @@ public class ExplosionBomb : MonoBehaviour
             ObjectCollect(10);
             foreach (GameObject obj in explosionObject)
             {
+                if (obj.transform.name == "FinallyPlayer")
+                {
+                    obj.gameObject.AddComponent<Rigidbody>();
+                    obj.GetComponent<CharacterController>().enabled = false;
+                }
                 if (obj.GetComponent<Rigidbody>() == true)
                 {
-                    if (obj.transform.name == "Player")
-                    {
-                        obj.GetComponent<CharacterController>().enabled = false;
-                    }
                     obj.GetComponent<Rigidbody>().isKinematic = false;
                     obj.GetComponent<Rigidbody>().AddExplosionForce(explodeDamage, transform.position, 5, explodeRadius, ForceMode.Impulse);
                     obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
             }
-            
+
             this.transform.parent = null;
             this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 100, ForceMode.Impulse);
-
+            PostProcessScript.instance.isPlayerDead = true;
             //게임 실패
             BombManager.instance.isGameFail = true;
 

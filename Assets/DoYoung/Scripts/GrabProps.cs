@@ -16,18 +16,13 @@ public class GrabProps : GrabberBase
     GameObject grabObject = null;
     public OVRInput.Controller hand;
     public float kAdjustForce = 3f;
-    int props;
     RaycastHit hitInfo;
     Ray ray;
-    void Start()
-    {
-        props = 1 << LayerMask.NameToLayer("object");
-    }
-
 
     void Update()
     {
-        if (!BombManager.instance.isBombState && !BombManager.instance.isGameFail)
+        // if (!BombManager.instance.isBombState && !BombManager.instance.isGameFail)
+        if (!BombManager.instance.isBombState)
         {
             if (grabObject == null)
             {
@@ -35,6 +30,7 @@ public class GrabProps : GrabberBase
 
                 bool isHit = Physics.Raycast(ray, out hitInfo);
                 lr.SetPosition(0, ray.origin);
+
                 if (isHit)
                 {
                     lr.SetPosition(1, hitInfo.point);
@@ -43,6 +39,7 @@ public class GrabProps : GrabberBase
                 {
                     lr.SetPosition(1, ray.origin + ray.direction * 10);
                 }
+
                 if (isHit && OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, hand))
                 {
 
