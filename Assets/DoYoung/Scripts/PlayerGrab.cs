@@ -113,7 +113,6 @@ public class PlayerGrab : MonoBehaviour
         if (OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch))
         {
 
-            print(highlightedDoors.Count);
             ClearOutline();
 
 
@@ -128,6 +127,7 @@ public class PlayerGrab : MonoBehaviour
         }
     }
 
+    public float bombGrapDistance = 2;
     void OnRightIndexButtonDown()
     {
 
@@ -137,7 +137,7 @@ public class PlayerGrab : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
         {
-            if (hitInfo.transform.tag == "Bomb")
+            if (hitInfo.transform.tag == "Bomb" && Vector3.Distance(hitInfo.point,transform.position) < bombGrapDistance)
             {
                 isBombHold = true;
                 BombManager.instance.isBombState = isBombHold;

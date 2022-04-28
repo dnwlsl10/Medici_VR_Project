@@ -61,7 +61,6 @@ public class PlayerMove : MonoBehaviour
                 Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
                 dirStick.y = 0;
                 Vector3 camRotateDir = new Vector3(0, dirStick.x, 0);
-                print(dirStick);
                 transform.Rotate(camRotateDir);
 
 
