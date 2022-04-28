@@ -21,6 +21,8 @@ public class BombManager : MonoBehaviour
     [SerializeField] private bool isSucessWireBox;
     [SerializeField] private bool isSucessArrowBox;
 
+    [SerializeField] private AudioSource breatSound;
+
     private void Awake()
     {
         instance = this;
@@ -90,6 +92,9 @@ public class BombManager : MonoBehaviour
     public void OnSucessEvent()
     {
         this.isBombState = false;
+        breatSound.Stop();
+
+
         StartCoroutine(OnSucessEvnetSound());
     }
 

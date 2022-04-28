@@ -14,7 +14,9 @@ public class PostProcessScript : MonoBehaviour
     PostProcessVolume ppv;
     private Vignette vignette;
     private AutoExposure autoExposure;
-  
+    bool isEndCourutineStart;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,19 +27,23 @@ public class PostProcessScript : MonoBehaviour
         vignette.active = true;
     }
 
+
     private void Update()
     {
         if (isPlayerDead)
         {
-            StartCoroutine(VigenetteOut());
+            StartCoroutine(VigenetteOutDead());
         }
 
-        if (BombManager.instance.isGameSuccess)
+        if (BombManager.instance.isGameSuccess && !isEndCourutineStart)
         {
-            StartCoroutine(VigenetteOut());
+            StartCoroutine(fadeOutSuccess());
+
+            isEndCourutineStart = true;
         }
+
     }
-    IEnumerator fadeOut()
+    IEnumerator fadeOutDead()
     {
         while (autoExposure.minLuminance.value < 9)
         {
@@ -48,7 +54,7 @@ public class PostProcessScript : MonoBehaviour
         App.instance.ChangeScene(eSceneType.Title);
     }
 
-    IEnumerator VigenetteOut()
+    IEnumerator VigenetteOutDead()
     {
         isPlayerDead = false;
         yield return new WaitForSeconds(2f);
@@ -58,6 +64,25 @@ public class PostProcessScript : MonoBehaviour
             yield return 0;
         }
 
-        StartCoroutine(fadeOut());
+        StartCoroutine(fadeOutDead());
     }
+
+    IEnumerator fadeOutSuccess()
+    {
+        //:TODO ÇÑ¼û ¼Ò¸®  => 
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "Sigh");
+
+        yield return new WaitForSeconds(6);
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "FaildSound");
+
+
+        yield return new WaitForSeconds(1);
+        SoundManager.instance.PlaySound(Camera.main.transform.position, "Huk");
+
+        autoExposure.minLuminance.value = 9;
+        //App.instance.ChangeScene(eSceneType.Title);
+
+
+    }
+
 }
