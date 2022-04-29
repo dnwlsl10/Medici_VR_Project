@@ -91,7 +91,7 @@ public class PostProcessScript : MonoBehaviour
         SoundManager.instance.PlaySound(Camera.main.transform.position, "Huk");
 
         autoExposure.minLuminance.value = 9;
-        //App.instance.ChangeScene(eSceneType.Title);
+        App.instance.ChangeScene(eSceneType.Title);
 
 
     }
