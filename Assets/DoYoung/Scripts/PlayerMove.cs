@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
                 }
 
                 {
-                    Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
+                    Vector2 dirStick = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick, OVRInput.Controller.LTouch);
                     Vector3 dirMove = new Vector3(dirStick.x, 0, dirStick.y);
                     dirMove.Normalize();
                     dirMove = Camera.main.transform.TransformDirection(dirMove);
@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
 
                     if (dirMove != Vector3.zero)
                     {
-                        if (!walkSource.isPlaying)
+                        if (!walkSource.isPlaying && !BombManager.instance.isBombState)
                         {
                             walkSource.Play();
                         }
@@ -58,12 +58,23 @@ public class PlayerMove : MonoBehaviour
 
 
             {
-                Vector2 dirStick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
-                dirStick.y = 0;
-                Vector3 camRotateDir = new Vector3(0, dirStick.x, 0);
-                transform.Rotate(camRotateDir);
+               if(OVRInput.GetDown(OVRInput.RawButton.RThumbstickRight, OVRInput.Controller.RTouch))
+                {
+                    Vector3 camRotateDir = new Vector3(0, 30f, 0);
+                    transform.Rotate(camRotateDir);
+                }
 
+                if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft, OVRInput.Controller.RTouch))
+                {
+                    Vector3 camRotateDir = new Vector3(0, -30f, 0);
+                    transform.Rotate(camRotateDir);
+                }
 
+                /*          dirStick.y = 0;
+                          Vector3 camRotateDir = new Vector3(0, dirStick.x, 0);
+                          transform.Rotate(camRotateDir * Time.deltaTime);
+
+          */
             }
         }
 

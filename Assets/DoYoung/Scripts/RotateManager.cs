@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateManager : MonoBehaviour
 {
     public GameObject rotateCube;
-
+    public Transform resetRotate;
     bool isRotateState;
     public Transform rotatePoint;
 
@@ -25,7 +25,14 @@ public class RotateManager : MonoBehaviour
     {
         if (BombManager.instance.isBombState)
         {
-            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) && !OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
+                if (OVRInput.GetDown(OVRInput.RawButton.B, OVRInput.Controller.Hands))
+                {
+                //this.rotateCube.transform.localPosition = this.resetRotate.localPosition;
+                this.rotateCube.transform.localRotation = this.resetRotate.localRotation;
+            }
+
+
+                if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) && !OVRInput.Get(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.RTouch))
             {
                 Vector3 dir = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.LTouch) * bombRoteAcel;
 

@@ -50,6 +50,9 @@ public class PlayerGrab : MonoBehaviour
 
         if (!BombManager.instance.isBombState)
         {
+           
+
+
             OnLeftHandButton();
 
             OnLeftHandButtonUp();
