@@ -15,11 +15,12 @@ public class PostProcessScript : MonoBehaviour
     private Vignette vignette;
     private AutoExposure autoExposure;
     bool isEndCourutineStart;
-
+    AudioSource playerBreath;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerBreath = GetComponent<AudioSource>();
         ppv = GetComponent<PostProcessVolume>();
         ppv.profile.TryGetSettings(out autoExposure);
         ppv.profile.TryGetSettings(out vignette);
@@ -42,6 +43,16 @@ public class PostProcessScript : MonoBehaviour
             isEndCourutineStart = true;
         }
 
+        if (BombManager.instance.isGameFail)
+        {
+            Invoke("AudioStop", 15);
+        }
+
+
+    }
+    void AudioStop()
+    {
+        playerBreath.Stop();
     }
     IEnumerator fadeOutDead()
     {
