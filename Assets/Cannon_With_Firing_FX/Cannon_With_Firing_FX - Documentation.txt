@@ -1,0 +1,11 @@
+A realistic cannon with firing special effects, including cannon animation, fuse sparks, fuse smoke, fuse flicking light, gun muzzle flash, gun muzzle light, gun muzzle sparks, gun muzzle smoke and sound effects.
+
+Load the "Cannon_With_Firing_FX.unity" for an example scene, or drag the Cannon_Firing.prefab asset from the Prefabs folder from the Project window into the Hierarchy window (Cannon.prefab is just the cannon model with no firing effects).
+
+The cannon firing script is triggered by the Fire1 input which by default is the left mouse button. Use Fire2 to reset the cannon fuse which is set to the right mouse button.
+
+Have fun!
+
+If you have any questions then please get in touch at bendurrant@rivermillstudios.com
+
+

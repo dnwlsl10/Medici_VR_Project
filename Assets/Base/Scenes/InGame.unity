@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.43668067, g: 0.4842744, b: 0.56452674, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 0691a21f19082b145bf9eff72d6f3aef, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 8fee76c132bf69547b934d6f46c790fa, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -320,7 +320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &447528641
 Light:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1007,6 +1007,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5261931488080759269, guid: 34f91f8706293a846bbf90e587fc8193, type: 3}
   m_PrefabInstance: {fileID: 1259085262}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1360074934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4927737680417905359, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+  m_PrefabInstance: {fileID: 4927737680414511653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1375058025
 Mesh:
   m_ObjectHideFlags: 0
@@ -1171,11 +1176,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &1614332448 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4927737680417905353, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
-  m_PrefabInstance: {fileID: 4927737680414511653}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1614609999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,11 +1207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1737100456 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4927737680417905357, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
-  m_PrefabInstance: {fileID: 4927737680414511653}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1752694527
 Mesh:
   m_ObjectHideFlags: 0
@@ -3919,12 +3914,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4910571385261075139, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910571385261075139, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.1
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910571387518907737, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4910571387518907737, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4927737678848665679, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3987,20 +3990,52 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4927737679567059058, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737679567059058, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4927737679567059069, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: inGame
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4927737679871006375, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737679871006375, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: finalBlitToCameraTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4927737680386787065, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: volumeTrigger
       value: 
-      objectReference: {fileID: 1737100456}
+      objectReference: {fileID: 1360074934}
+    - target: {fileID: 4927737680386787065, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: finalBlitToCameraTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680411112197, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: usePerEyeCameras
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680411112197, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: useFixedUpdateForTracking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680411112207, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: minRenderScale
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4927737680416265495, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: near clip plane
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: m_ShowToolkit
@@ -4009,9 +4044,13 @@ PrefabInstance:
     - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: volumeTrigger
       value: 
-      objectReference: {fileID: 1614332448}
+      objectReference: {fileID: 1360074934}
     - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
       propertyPath: m_ShowCustomSorter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927737680570044244, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+      propertyPath: finalBlitToCameraTarget
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
