@@ -1694,7 +1694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 971046595230511224, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 971046595230511224, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -1806,7 +1806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2037706835509669920, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -2206,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404478890782094762, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7404478890782094762, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -2366,7 +2366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404478892546109323, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7404478892546109323, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -3803,7 +3803,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
