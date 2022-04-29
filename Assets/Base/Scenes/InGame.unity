@@ -1483,6 +1483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: office building 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2576637997573504876, guid: 21f03c7992cfca34485c20203e4189ac, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2578264405611095781, guid: 21f03c7992cfca34485c20203e4189ac, type: 3}
       propertyPath: bomb
       value: 

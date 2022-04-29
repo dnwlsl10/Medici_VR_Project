@@ -14,6 +14,7 @@ public class App : MonoBehaviour
     private void Awake()
     {
         Screen.SetResolution(960, 540, false);
+        Application.targetFrameRate = 100;
         instance = this;
     }
 
