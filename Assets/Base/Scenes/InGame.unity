@@ -2478,43 +2478,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[0].endTime
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[1].endTime
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[2].endTime
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[3].endTime
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[4].endTime
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[0].startTime
-      value: 10
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[1].startTime
-      value: 10
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[2].startTime
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[3].startTime
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[4].startTime
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7670949617103219145, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: m_Enabled
