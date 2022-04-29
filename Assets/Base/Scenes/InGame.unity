@@ -2354,7 +2354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7225479294362592322, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: minutes
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7225479294362592322, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: seconds
