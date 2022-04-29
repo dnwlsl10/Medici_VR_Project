@@ -21,8 +21,11 @@ public class GrabProps : GrabberBase
 
     void Update()
     {
-        // if (!BombManager.instance.isBombState && !BombManager.instance.isGameFail)
-        if (!BombManager.instance.isBombState)
+         if (!BombManager.instance.isBombState && !BombManager.instance.isGameFail)
+        {
+            lr.enabled = false;
+        }
+        if (!BombManager.instance.isBombState && !BombManager.instance.isGameFail)
         {
             if (grabObject == null)
             {

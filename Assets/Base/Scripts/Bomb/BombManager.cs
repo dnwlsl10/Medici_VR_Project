@@ -92,7 +92,12 @@ public class BombManager : MonoBehaviour
     public void OnSucessEvent()
     {
         this.isBombState = false;
-        breatSound.Stop();
+        
+        if(breatSound != null)
+        {
+            breatSound.Stop();
+
+        }
 
 
         StartCoroutine(OnSucessEvnetSound());

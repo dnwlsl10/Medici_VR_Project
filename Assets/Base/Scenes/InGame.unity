@@ -397,6 +397,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!82 &716963554 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4927737680096769002, guid: 9416bc685724df74ba42bdaf62ab2594, type: 3}
+  m_PrefabInstance: {fileID: 4927737680414511653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &788023597
 Mesh:
   m_ObjectHideFlags: 0
@@ -2456,6 +2461,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
+      propertyPath: pushedZDistance
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670949616877107711, guid: 8f2dc68ddaa23c84c9de4a96e768ee93, type: 3}
       propertyPath: patterns.Array.data[0].endTime
       value: 5
       objectReference: {fileID: 0}
@@ -4070,6 +4079,10 @@ PrefabInstance:
       propertyPath: bombMode
       value: 
       objectReference: {fileID: 2687007188296000062}
+    - target: {fileID: 9208368318632824176, guid: a0b544a4bf1eafc46b6d02363522c642, type: 3}
+      propertyPath: breatSound
+      value: 
+      objectReference: {fileID: 716963554}
     - target: {fileID: 9208368318632824177, guid: a0b544a4bf1eafc46b6d02363522c642, type: 3}
       propertyPath: m_RootOrder
       value: 4

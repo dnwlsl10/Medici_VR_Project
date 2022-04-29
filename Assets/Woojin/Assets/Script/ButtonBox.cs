@@ -252,6 +252,7 @@ public class ButtonBox : MonoBehaviour, BombInterface
 
     public void PullButton()
     {
+        defaultPosition = button.gameObject.transform.position;
         pushedPosition = button.transform.position;
         Debug.Log("UpUPUPUPUPUPUPUPUPUP");
         isButtonPush = false;
